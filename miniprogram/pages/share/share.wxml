@@ -1,0 +1,16 @@
+<!--miniprogram/pages/recordlist/recordlist.wxml-->
+<!-- <text>miniprogram/pages/recordlist/recordlist.wxml</text> -->
+<import src="../../common/channel/channel.wxml" />
+<view hidden="{{true}}" class='container'>
+  <template is="channel" data='{{channelState: channelState}}'/>
+</view>
+<view style="width: auto; margin: 10rpx; background:#e7f505">
+  <scroll-view scroll-y style="height: 90vh;" bindscrolltoupper="upper" bindscrolltolower="lower">
+    <view>我的体测：(日期)</view>
+    <view>骨骼肌：70kg</view>
+    <view>体脂率：20.5</view>
+    <view>地址：一二三四十</view>
+    <view>电话：123456789</view>
+  </scroll-view>
+  <button>分享</button>
+</view>

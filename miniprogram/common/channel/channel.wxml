@@ -1,0 +1,17 @@
+<template name="channel">
+
+<view class='channel_bar'>
+  <image class='channelbg_image' src='../../images/head_bg.jpg'></image>
+  <view class='channelbg'>
+    <view class='channel' bindtap='selectChannel' data-from='A'>
+      <image class='channel_image' src="{{channelState==0 ? '../../images/channelselectedA.png' : '../../images/channelnormalA.png' }}"></image>
+    </view>
+    <view class='channel' bindtap='selectChannel' data-from='all'>
+      <image class='channel_image' src="{{channelState==1 ? '../../images/channelselectedAB.png' : '../../images/channelnormalAB.png'}}"></image>
+    </view>
+    <view class='channel' bindtap='selectChannel' data-from='B'>
+      <image class='channel_image' src="{{channelState==2 ? '../../images/channelselectedB.png' : '../../images/channelnormalB.png'}}"></image>
+    </view>
+  </view>
+</view>
+</template>

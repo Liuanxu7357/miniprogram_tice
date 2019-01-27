@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/share/share",
+    "pages/trend/trend",
+    "pages/recordlist/recordlist",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -8,6 +11,23 @@
     "pages/deployFunctions/deployFunctions",
     "pages/chooseLib/chooseLib"
   ],
+  "tabBar": {
+    "position": "top",
+    "list": [
+      {
+        "pagePath": "pages/recordlist/recordlist",
+        "text": "测试记录"
+      },
+      {
+        "pagePath": "pages/trend/trend",
+        "text": "趋势分析"
+      },
+      {
+        "pagePath": "pages/share/share",
+        "text": "朋友分享"
+      }
+    ]
+  },
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
