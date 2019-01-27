@@ -5,12 +5,41 @@
   <template is="channel" data='{{channelState: channelState}}'/>
 </view>
 <view style="width: auto; margin: 10rpx; background:#e7f505">
-  <scroll-view scroll-y style="height: 90vh;" bindscrolltoupper="upper" bindscrolltolower="lower">
-    <view>我的体测：(日期)</view>
-    <view>骨骼肌：70kg</view>
-    <view>体脂率：20.5</view>
-    <view>地址：一二三四十</view>
-    <view>电话：123456789</view>
+  <scroll-view scroll-y style="height: 85vh;" bindscrolltoupper="upper" bindscrolltolower="lower">
+    <view class="addr">
+      <view style="margin-top:43rpx; margin-left:66rpx; font-size:54rpx;">我的体测：</view>
+      <view class="addr_content">2019-01-28 13:40</view>
+    </view>
+    <view style="height:549rpx; width:auto; margin:10rpx;" class="item_line">
+      <!-- 左侧：小人 -->
+      <view style="height:100%; width:45%; margin-left:20rpx">
+        <image style="height:549rpx; width:289rpx;" src="../../images/_90_human_background.png"></image>
+      </view>
+
+      <!-- 右侧：骨骼肌\体脂率 -->
+      <view style="height:100%; width:55%;">
+        <view style="height: 50%; width: 100%;" class="item_line">
+          <view style="font-size:45rpx;">骨骼肌：70kg</view>
+          <image style="height:66rpx; width:64rpx;" src="../../images/thumb_good.jpg"></image>
+        </view>
+        <view style="height: 50%; width: 100%" class="item_line">
+          <view style="font-size:45rpx;">体脂率：20.5</view>
+          <image style="height:66rpx; width:64rpx;" src="../../images/thumb_good.jpg"></image>
+        </view>
+      </view>
+    </view>
+    <view style="margin-top:43rpx; margin-left:66rpx;">
+      <view class="addr">
+        <view class="addr_tittle">地址：</view>
+        <view class="addr_content">一二三四十</view>
+      </view>
+      <view class="addr">
+        <view class="addr_tittle">电话：</view>
+        <view class="addr_content">123456789</view>
+      </view>
+    </view>
   </scroll-view>
-  <button>分享</button>
+  <view style="height: 15vh; background: #014e4c" class="item_line">
+    <image style="height:112rpx; width:367rpx" src="../../images/share.jpg"></image>
+  </view>
 </view>

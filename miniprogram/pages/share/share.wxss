@@ -42,3 +42,25 @@ page {
   font-size: 20rpx;
   background: #000000;
 }
+
+.addr {
+  width: 100%; 
+  display: flex;
+  justify-content: start;
+  align-items: baseline;
+  justify-items: auto;
+  flex-direction: row;
+}
+
+.addr_tittle {
+  text-align:center; 
+  font-size: 31rpx;
+	width: 129rpx;
+	height: 37rpx;
+	background-color: #ea961d;
+	border-radius: 18rpx;
+}
+
+.addr_content {
+  font-size: 31rpx;
+}
