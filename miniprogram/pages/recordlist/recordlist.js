@@ -1,5 +1,6 @@
 // miniprogram/pages/recordlist/recordlist.js
 const channel = require("../../common/channel/channel.js");
+const util = require("../../utils/util.js");
 
 Page({
 
@@ -33,7 +34,28 @@ Page({
     ]
   },
 
+  addrecord: function (e) {
+    let records = this.data.records;
+    records.push({ id: 0, date: Date.now(), weight: util.randomNum(50, 120), gugeji: util.randomNum(20, 40), tizhilv: util.randomNum(40, 60) });
+    this.setData({
+      records: records,
+    });
+  },
+
   scan: function (e) {
+    let that = this;
+    wx.showModal({
+      title: '添加记录',
+      content: '确定要添加本条记录？',
+      success(res) {
+        if (res.confirm) {
+          // 点击确定，添加一条记录
+          that.addrecord();
+        }
+      }
+    });
+    return;
+    
     // 只允许从相机扫码
     wx.scanCode({
       onlyFromCamera: true,
@@ -41,7 +63,7 @@ Page({
         // 将记录保存下来
         console.log(res)
       }
-    })
+    });
   },
 
   onItemClick: function (e) {
