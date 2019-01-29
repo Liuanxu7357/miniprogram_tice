@@ -9,28 +9,39 @@ Page({
   data: {
     channelState: 0,
     records: [
-      { id: 0, date: 234323, weight: 15.5, gugeji: 32, tizhilv: 23 },
-      { id: 1, date: 234323, weight: 60.7, gugeji: 32, tizhilv: 23 },
-      { id: 2, date: 234323, weight: 74.2, gugeji: 32, tizhilv: 23 },
-      { id: 3, date: 234323, weight: 75.2, gugeji: 32, tizhilv: 23 },
-      { id: 4, date: 234323, weight: 76.2, gugeji: 32, tizhilv: 23 },
-      { id: 5, date: 234323, weight: 77.2, gugeji: 32, tizhilv: 23 },
-      { id: 6, date: 234323, weight: 78.2, gugeji: 32, tizhilv: 23 },
-      { id: 7, date: 234323, weight: 15.5, gugeji: 32, tizhilv: 23 },
-      { id: 8, date: 234323, weight: 60.7, gugeji: 32, tizhilv: 23 },
-      { id: 9, date: 234323, weight: 74.2, gugeji: 32, tizhilv: 23 },
-      { id: 10, date: 234323, weight: 75.2, gugeji: 32, tizhilv: 23 },
-      { id: 11, date: 234323, weight: 76.2, gugeji: 32, tizhilv: 23 },
-      { id: 12, date: 234323, weight: 77.2, gugeji: 32, tizhilv: 23 },
-      { id: 13, date: 234323, weight: 78.2, gugeji: 32, tizhilv: 23 },
-      { id: 14, date: 234323, weight: 15.5, gugeji: 32, tizhilv: 23 },
-      { id: 15, date: 234323, weight: 60.7, gugeji: 32, tizhilv: 23 },
-      { id: 16, date: 234323, weight: 74.2, gugeji: 32, tizhilv: 23 },
-      { id: 17, date: 234323, weight: 75.2, gugeji: 32, tizhilv: 23 },
-      { id: 18, date: 234323, weight: 76.2, gugeji: 32, tizhilv: 23 },
-      { id: 19, date: 234323, weight: 77.2, gugeji: 32, tizhilv: 23 },
-      { id: 20, date: 234323, weight: 78.2, gugeji: 32, tizhilv: 23 },
+      { id: 0, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
+      { id: 1, date: 1548870444345, weight: 60.7, gugeji: 32, tizhilv: 23 },
+      { id: 2, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
+      { id: 3, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
+      { id: 4, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
+      { id: 5, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
+      { id: 6, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
+      { id: 7, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
+      { id: 8, date: 1548770344345, weight: 60.7, gugeji: 32, tizhilv: 23 },
+      { id: 9, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
+      { id: 10, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
+      { id: 11, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
+      { id: 12, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
+      { id: 13, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
+      { id: 14, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
+      { id: 15, date: 1548770344345, weight: 60.7, gugeji: 32, tizhilv: 23 },
+      { id: 16, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
+      { id: 17, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
+      { id: 18, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
+      { id: 19, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
+      { id: 20, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
     ]
+  },
+
+  scan: function (e) {
+    // 只允许从相机扫码
+    wx.scanCode({
+      onlyFromCamera: true,
+      success(res) {
+        // 将记录保存下来
+        console.log(res)
+      }
+    })
   },
 
   onItemClick: function (e) {
@@ -56,7 +67,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(Date.now());
   },
 
   /**

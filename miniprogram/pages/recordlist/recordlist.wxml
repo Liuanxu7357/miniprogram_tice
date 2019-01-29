@@ -11,13 +11,18 @@
   <text style="width:20%;" class="item head_item">骨骼肌</text>
   <text style="width:20%;" class="item head_item">体脂率</text>
 </view>
-<scroll-view scroll-y style="height: 94vh;" bindscrolltoupper="upper" bindscrolltolower="lower">
+<scroll-view scroll-y style="height: 78vh;" bindscrolltoupper="upper" bindscrolltolower="lower">
   <view id="{{item.id}}" bindtap="onItemClick" class="item_line scroll_item_line" hover-class='item_line_hover' wx:for="{{records}}" wx:key="id">
-    <text style="width:40%;" class="item scroll_item">{{item.date}}</text>
+    <text style="width:40%;" class="item scroll_item">{{recordlist.formatTime(item.date)}}</text>
     <text style="width:20%;" class="item scroll_item">{{item.weight}}</text>
     <text style="width:20%;" class="item scroll_item">{{item.gugeji}}</text>
     <text style="width:20%;" class="item scroll_item">{{item.tizhilv}}</text>
   </view>
 </scroll-view>
+  <view style="height: 15vh; background: #014e4c" class="item_line">
+    <image bindtap="scan" style="height:112rpx; width:367rpx" src="../../images/share.jpg"></image>
+  </view>
 </view>
+
+<wxs src="recordlist.wxs" module="recordlist"/>
 
