@@ -29,10 +29,10 @@ Page({
     // 查询当前用户所有的 counters
     console.log("getRecordlist2: " + app.globalData.openid);
     if (app.globalData.openid == null) {
-      reject("fail");
       return;
     }
 
+    // 才查询到20个数据项?
     db.collection('counters').where({
       _openid: app.globalData.openid
     }).get({
@@ -43,7 +43,12 @@ Page({
         console.log('[数据库] [查询记录] 成功: ', res)
 
         // 赋值到全局变量上
-        app.globalData.records = res.data;
+        // 重新排列数据
+        function sortDevices(a, b) {
+          return b.date - a.date;
+        };
+
+        app.globalData.records = res.data.sort(sortDevices);
 
         // 进入
         wx.reLaunch({

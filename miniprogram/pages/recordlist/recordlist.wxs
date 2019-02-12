@@ -4,12 +4,14 @@ function formatTime(intdate) {
   var Day = date.getDate();
   var hours = date.getHours(); //计算剩余的小时
   var minutes = date.getMinutes(); //计算剩余的分钟
+  var seconds = date.getSeconds();
   var Y = date.getFullYear() + '-';
   var M = Month < 10 ? '0' + Month + '-' : Month + '-';
   var D = Day + 1 < 10 ? '0' + Day + '' : Day + '';
   var H = hours < 10 ? '0' + hours + ':' : hours + ':'
   var m = minutes < 10 ? '0' + minutes : minutes;
-  return Y + M + D + "   " + H + m;
+  var s = seconds < 10 ? '0' + seconds : seconds;
+  return M + D + " " + H + m + ":" + s;
 }
 
 var localData = function (value) {
