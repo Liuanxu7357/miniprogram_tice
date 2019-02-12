@@ -4,7 +4,8 @@ const app = getApp()
 Page({
   data: {
     avatarUrl: './user-unlogin.png',
-    userInfo: {},
+    text: "进入",
+    userInfo: null,
     logged: false,
     takeSession: false,
     requestResult: ''
@@ -13,13 +14,40 @@ Page({
   // tap
   tap: function (e) {
     console.log(e);
+    console.log("tap:", this.data.userInfo);
+    if (this.data.userInfo == null) {
+      return;
+    }
+    
+    this.gotoRecordlist();
+  },
+
+  // 进入
+  gotoRecordlist: function (e) {
+    console.log("gotoRecordlist");
     wx.reLaunch({
       url: '../recordlist/recordlist',
     });
   },
 
+  // 启动类型
+  // 1. default 默认类型；
+  // 2. share；
   onLoad: function(e) {
     console.log(e);
+
+    // 1. 获取openid 和 昵称；
+    this.onGetOpenid();
+
+    // 2. 获取传入参数，匹配启动类型；
+    // 2.1 分享式启动；(参数需要传递openid, nickname等等)
+    // 2.2 默认方式启动；
+    if (e.type != null && e.type == "share" && e.shareid != null) {
+      this.setData({ boot: { type: "share", shareid: e.shareid, shareNickName: e.nickName}});
+      this.setData({ text: "查看 " + e.nickName + " 的体测记录"});
+    } else {
+      this.setData({ boot: { type: "default", shareid: ""}});
+    }
 
     if (!wx.cloud) {
       wx.redirectTo({
@@ -46,6 +74,7 @@ Page({
     })
   },
 
+  // 获取用户信息成功回调
   onGetUserInfo: function(e) {
     if (!this.logged && e.detail.userInfo) {
       this.setData({
@@ -53,6 +82,12 @@ Page({
         avatarUrl: e.detail.userInfo.avatarUrl,
         userInfo: e.detail.userInfo
       })
+
+      // 将基本信息放到全局变量中
+      app.globalData.userInfo = e.detail.userInfo;
+
+      // 进入
+      this.gotoRecordlist();
     }
   },
 
@@ -64,15 +99,15 @@ Page({
       success: res => {
         console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
-        wx.navigateTo({
-          url: '../userConsole/userConsole',
-        })
+        // wx.navigateTo({
+        //   url: '../userConsole/userConsole',
+        // })
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
-        wx.navigateTo({
-          url: '../deployFunctions/deployFunctions',
-        })
+        // wx.navigateTo({
+        //   url: '../deployFunctions/deployFunctions',
+        // })
       }
     })
   },

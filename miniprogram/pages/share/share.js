@@ -1,5 +1,6 @@
 // miniprogram/pages/recordlist/recordlist.js
 const channel = require("../../common/channel/channel.js");
+const app = getApp();
 import Card from '../../palette/card';
 
 Page({
@@ -155,10 +156,12 @@ Page({
     //   }
     // }
 
+    console.log(app.globalData.userInfo);
+
     return {
       title: 'title',
       desc: '快来听听吧！',
-      path: 'pages/index2/index?id=' + 'resultid' + "&singer=" + 'this.data.userInfo.nickName' + "&title=" + 'this.data.title_value',
+      path: 'pages/index2/index?type=' + 'share' + "&nickName=" + app.globalData.userInfo.nickName + "&shareid=" + app.globalData.openid,
       imageUrl: 'imageUrl',
       success: function (res) {
         // 转发成功
