@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/recordlist/recordlist",
+    "pages/index2/index",
     "pages/share/share",
+    "pages/recordlist/recordlist",
     "pages/trend/trend",
     "pages/index/index",
     "pages/userConsole/userConsole",

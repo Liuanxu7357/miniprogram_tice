@@ -4,6 +4,17 @@
 <view hidden="{{true}}" class='container'>
   <template is="channel" data='{{channelState: channelState}}'/>
 </view>
+
+<view hidden="{{true}}">
+  <painter  palette="{{template}}" bind:imgOK="onImgOK" bind:imgErr="onImgErr" />
+</view>
+<!-- 样式一 -->
+<share-one 
+  avatar='{{ shareOne.avatar }}'
+  nickname='{{ shareOne.nickname }}'
+  showShareModel='{{ shareOne.showShareModel }}'
+></share-one>
+
 <view style="width: auto; margin: 10rpx; background:#e7f505">
   <scroll-view scroll-y style="height: 85vh;" bindscrolltoupper="upper" bindscrolltolower="lower">
     <view class="addr">

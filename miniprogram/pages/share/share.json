@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "painter": "/components/painter/painter",
+    "share-one": "../../components/share-moment/index"
+  }
 }

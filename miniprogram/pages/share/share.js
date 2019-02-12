@@ -1,5 +1,6 @@
 // miniprogram/pages/recordlist/recordlist.js
 const channel = require("../../common/channel/channel.js");
+import Card from '../../palette/card';
 
 Page({
 
@@ -33,32 +34,31 @@ Page({
     ]
   },
 
-  share: function (e) {
-    console.log(e);
-    wx.showShareMenu({
-      withShareTicket: true
+  // 分享
+  bindshare: function (e) {
+    this.setData({
+      shareOne: {
+        avatar: 'https://wx.qlogo.cn/mmopen/vi_32/gcs9nfrPIjZSfZvMmVCK81MpPbWqDspNfc2lRLqllfrpYT61RQWNMHXCfzSia7OiapOfXTjYFR6EF7JQZib5MRCdA/132',
+        nickname: '极客学苑',
+        showShareModel: true
+      }
     })
   },
 
-  onShareAppMessage(res) {
-    console.log(this.data.hasUserInfo);
-    if (this.data.hasUserInfo) {
-      let ta = this.data.userInfo.gender == 1 ? '他' : '她';
-      let title = this.data.userInfo.nickName + ' 分享给你' + ta + '朗诵的' + this.data.title_value;
-      let imageUrl = this.data.userInfo.avatarUrl;
-      return {
-        title: title,
-        desc: '快来听听吧！',
-        path: 'pages/recordlist/recordlist?id=' + resultid + "&singer=" + this.data.userInfo.nickName + "&title=" + this.data.title_value,
-        imageUrl: imageUrl,
-        success: function (res) {
-          // 转发成功
-        },
-        fail: function (res) {
-          // 转发失败
-        }
-      }
-    }
+  share: function (e) {
+    console.log(e);
+    // wx.showShareMenu({
+    //   withShareTicket: true
+    // })
+  },
+
+  onImgOK(e) {
+    // 其中 e.detail.path 为生成的图片路径
+    console.log(e);
+  },
+
+  onImgErr(e) {
+    console.log(e);
   },
 
   onItemClick: function (e) {
@@ -84,8 +84,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
+    // this.setData({
+    //   template: new Card().palette(),
+    // });
+  }, 
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -132,7 +134,40 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (res) {
+    console.log(res);
+    // console.log(this.data.hasUserInfo);
+    // if (this.data.hasUserInfo) {
+    //   let ta = this.data.userInfo.gender == 1 ? '他' : '她';
+    //   let title = this.data.userInfo.nickName + ' 分享给你' + ta + '朗诵的' + this.data.title_value;
+    //   let imageUrl = this.data.userInfo.avatarUrl;
+    //   return {
+    //     title: title,
+    //     desc: '快来听听吧！',
+    //     path: 'pages/index2/index?id=' + resultid + "&singer=" + this.data.userInfo.nickName + "&title=" + this.data.title_value,
+    //     imageUrl: imageUrl,
+    //     success: function (res) {
+    //       // 转发成功
+    //     },
+    //     fail: function (res) {
+    //       // 转发失败
+    //     }
+    //   }
+    // }
 
+    return {
+      title: 'title',
+      desc: '快来听听吧！',
+      path: 'pages/index2/index?id=' + 'resultid' + "&singer=" + 'this.data.userInfo.nickName' + "&title=" + 'this.data.title_value',
+      imageUrl: 'imageUrl',
+      success: function (res) {
+        // 转发成功
+        console.log(res);
+      },
+      fail: function (res) {
+        // 转发失败
+        console.log(res);
+      }
+    }
   }
 })
