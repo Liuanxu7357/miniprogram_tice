@@ -48,11 +48,45 @@ Page({
     })
   },
 
+  onAdd: function (record) {
+    const db = wx.cloud.database()
+    db.collection('counters').add({
+      data: record,
+      success: res => {
+        // 在返回结果中会包含新创建的记录的 _id
+        this.setData({
+          counterId: res._id,
+          count: 1
+        })
+        wx.showToast({
+          title: '新增记录成功',
+        })
+        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '新增记录失败'
+        })
+        console.error('[数据库] [新增记录] 失败：', err)
+      }
+    })
+  },
+
   addrecord: function (e) {
     let records = this.data.records;
-    records.push({ id: 0, date: Date.now(), weight: util.randomNum(50, 120), gugeji: util.randomNum(20, 40), tizhilv: util.randomNum(40, 60) });
+    let record = { id: 0, date: Date.now(), weight: util.randomNum(50, 120), gugeji: util.randomNum(20, 40), tizhilv: util.randomNum(40, 60) };
+    this.onAdd(record);
+    records.push(record);
+
+    // 将records按照从大到小排序一下
+    // 重新排列数据
+    function sortDevices(a, b) {
+      return b.date - a.date;
+    };
+
     this.setData({
-      records: records,
+      records: records.sort(sortDevices),
     });
 
     console.log(records.length);
@@ -114,7 +148,11 @@ Page({
    */
   onLoad: function (options) {
     console.log(Date.now());
-    getApp().globalData.records = this.data.records;
+    let records = getApp().globalData.records;
+    this.setData({
+      records: records,
+    });
+    // getApp().globalData.records = this.data.records;
   },
 
   /**

@@ -25,9 +25,39 @@ Page({
   // 进入
   gotoRecordlist: function (e) {
     console.log("gotoRecordlist");
-    wx.reLaunch({
-      url: '../recordlist/recordlist',
-    });
+    const db = wx.cloud.database()
+    // 查询当前用户所有的 counters
+    console.log("getRecordlist2: " + app.globalData.openid);
+    if (app.globalData.openid == null) {
+      reject("fail");
+      return;
+    }
+
+    db.collection('counters').where({
+      _openid: app.globalData.openid
+    }).get({
+      success: res => {
+        this.setData({
+          queryResult: JSON.stringify(res.data, null, 2)
+        })
+        console.log('[数据库] [查询记录] 成功: ', res)
+
+        // 赋值到全局变量上
+        app.globalData.records = res.data;
+
+        // 进入
+        wx.reLaunch({
+          url: '../recordlist/recordlist',
+        });
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
   },
 
   // 启动类型
@@ -35,6 +65,7 @@ Page({
   // 2. share；
   onLoad: function(e) {
     console.log(e);
+    let that = this;
 
     // 1. 获取openid 和 昵称；
     this.onGetOpenid();
@@ -67,11 +98,45 @@ Page({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
               })
+              that.gotoRecordlist();
             }
           })
         }
       }
     })
+  },
+
+  getRecordlist: function (e) {
+    const db = wx.cloud.database()
+    console.log("getRecordlist: " + app.globalData.openid);
+    return new Promise(function (resolve, reject) {
+      // 查询当前用户所有的 counters
+      console.log("getRecordlist2: " + app.globalData.openid);
+      if (app.globalData.openid == null) {
+        reject("fail");
+        return;
+      }
+
+      db.collection('counters').where({
+        _openid: app.globalData.openid
+      }).get({
+        success: res => {
+          this.setData({
+            queryResult: JSON.stringify(res.data, null, 2)
+          })
+          console.log('[数据库] [查询记录] 成功: ', res)
+          resolve('Success!');
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+          reject('Fail!');
+        }
+      })
+    });
   },
 
   // 获取用户信息成功回调
@@ -86,7 +151,7 @@ Page({
       // 将基本信息放到全局变量中
       app.globalData.userInfo = e.detail.userInfo;
 
-      // 进入
+      // 获取数据
       this.gotoRecordlist();
     }
   },
