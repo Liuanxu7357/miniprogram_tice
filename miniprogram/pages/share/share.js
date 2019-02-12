@@ -33,6 +33,34 @@ Page({
     ]
   },
 
+  share: function (e) {
+    console.log(e);
+    wx.showShareMenu({
+      withShareTicket: true
+    })
+  },
+
+  onShareAppMessage(res) {
+    console.log(this.data.hasUserInfo);
+    if (this.data.hasUserInfo) {
+      let ta = this.data.userInfo.gender == 1 ? '他' : '她';
+      let title = this.data.userInfo.nickName + ' 分享给你' + ta + '朗诵的' + this.data.title_value;
+      let imageUrl = this.data.userInfo.avatarUrl;
+      return {
+        title: title,
+        desc: '快来听听吧！',
+        path: 'pages/recordlist/recordlist?id=' + resultid + "&singer=" + this.data.userInfo.nickName + "&title=" + this.data.title_value,
+        imageUrl: imageUrl,
+        success: function (res) {
+          // 转发成功
+        },
+        fail: function (res) {
+          // 转发失败
+        }
+      }
+    }
+  },
+
   onItemClick: function (e) {
     console.log(e);
   },

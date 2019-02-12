@@ -1,6 +1,7 @@
 // miniprogram/pages/recordlist/recordlist.js
 const channel = require("../../common/channel/channel.js");
 const util = require("../../utils/util.js");
+const app = getApp();
 
 Page({
 
@@ -10,28 +11,41 @@ Page({
   data: {
     channelState: 0,
     records: [
-      // { id: 0, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
-      // { id: 1, date: 1548870444345, weight: 60.7, gugeji: 32, tizhilv: 23 },
-      // { id: 2, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
-      // { id: 3, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
-      // { id: 4, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
-      // { id: 5, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
-      // { id: 6, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
-      // { id: 7, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
-      // { id: 8, date: 1548770344345, weight: 60.7, gugeji: 32, tizhilv: 23 },
-      // { id: 9, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
-      // { id: 10, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
-      // { id: 11, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
-      // { id: 12, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
-      // { id: 13, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
-      // { id: 14, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
-      // { id: 15, date: 1548770344345, weight: 60.7, gugeji: 32, tizhilv: 23 },
-      // { id: 16, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
-      // { id: 17, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
-      // { id: 18, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
-      // { id: 19, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
-      // { id: 20, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
+      { id: 0, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
+      { id: 1, date: 1548870444345, weight: 60.7, gugeji: 32, tizhilv: 23 },
+      { id: 2, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
+      { id: 3, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
+      { id: 4, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
+      { id: 5, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
+      { id: 6, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
+      { id: 7, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
+      { id: 8, date: 1548770344345, weight: 60.7, gugeji: 32, tizhilv: 23 },
+      { id: 9, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
+      { id: 10, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
+      { id: 11, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
+      { id: 12, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
+      { id: 13, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
+      { id: 14, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
+      { id: 15, date: 1548770344345, weight: 60.7, gugeji: 32, tizhilv: 23 },
+      { id: 16, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
+      { id: 17, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
+      { id: 18, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
+      { id: 19, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
+      { id: 20, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
     ]
+  },
+
+  /**
+ * 获取用户信息
+ */
+  getUserInfo: function (e) {
+    console.log("userinfo")
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
   },
 
   addrecord: function (e) {
@@ -40,10 +54,20 @@ Page({
     this.setData({
       records: records,
     });
+
+    console.log(records.length);
+
+    getApp().globalData.records = records;
   },
 
   scan: function (e) {
     let that = this;
+    
+    // 判断是否已经获取用户ID，否则不进行扫码
+    if (app.globalData.userInfo == null) {
+      return;
+    }
+
     wx.showModal({
       title: '添加记录',
       content: '确定要添加本条记录？',
@@ -90,6 +114,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(Date.now());
+    getApp().globalData.records = this.data.records;
   },
 
   /**

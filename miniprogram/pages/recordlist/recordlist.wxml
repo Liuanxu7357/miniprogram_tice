@@ -23,8 +23,11 @@
   </view> -->
 </scroll-view>
   <view style="height: 15vh; background: #014e4c" class="item_line">
-    <image bindtap="scan" style="height:112rpx; width:367rpx" src="../../images/share.jpg"></image>
-  </view>
+    <!-- 开始按钮 -->
+    <button style="background-color: transparent;" open-type='getUserInfo' id='start' bindgetuserinfo='getUserInfo' class='imageBtn' bindtap='scan'>
+      <image style="height:78rpx; width:382rpx" src="../../images/get_report.png"></image>
+    </button>
+  </view> 
 </view>
 
 <wxs src="recordlist.wxs" module="recordlist"/>

@@ -1,12 +1,26 @@
-const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
+// const formatTime = date => {
+//   const year = date.getFullYear()
+//   const month = date.getMonth() + 1
+//   const day = date.getDate()
+//   const hour = date.getHours()
+//   const minute = date.getMinutes()
+//   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+//   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+// }
+
+function formatTime(intdate) {
+  var date = new Date(intdate);
+  var Month = date.getMonth() + 1;
+  var Day = date.getDate();
+  var hours = date.getHours(); //计算剩余的小时
+  var minutes = date.getMinutes(); //计算剩余的分钟
+  var Y = date.getFullYear() + '-';
+  var M = Month < 10 ? '0' + Month + '-' : Month + '-';
+  var D = Day + 1 < 10 ? '0' + Day + '' : Day + '';
+  var H = hours < 10 ? '0' + hours + ':' : hours + ':'
+  var m = minutes < 10 ? '0' + minutes : minutes;
+  return M + D + " " + H + m;
 }
 
 const formatNumber = n => {

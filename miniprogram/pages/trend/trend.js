@@ -1,6 +1,12 @@
 var wxCharts = require('../../utils/wxcharts.js');
+const util = require('../../utils/util.js');
 var app = getApp();
 var lineChart = null;
+
+let records;
+
+var startPos = null;
+
 Page({
   data: {
     records: [
@@ -27,21 +33,32 @@ Page({
       { id: 20, date: 234323, weight: 60.2, gugeji: 32, tizhilv: 23 },
     ]
   },
+
+  getTime: function () {
+
+  },
+
   touchHandler: function (e) {
-    console.log(lineChart.getCurrentDataIndex(e));
+    lineChart.scrollStart(e);
+  },
+  moveHandler: function (e) {
+    lineChart.scroll(e);
+  },
+  touchEndHandler: function (e) {
+    lineChart.scrollEnd(e);
     lineChart.showToolTip(e, {
-      // background: '#7cb5ec',
       format: function (item, category) {
         return category + ' ' + item.name + ':' + item.data
       }
     });
   },
+
   createSimulationData: function () {
     var categories = [];
     var data = [];
-    for (var i = 0; i < 12; i++) {
-      categories.push('2018-' + (i + 1));
-      data.push(this.data.records[i].weight);
+    for (var i = 0; i < records.length; i++) {
+      categories.push(util.formatTime(records[i].date));
+      data.push(records[i].weight);
     }
     // data[4] = null;
     return {
@@ -53,9 +70,9 @@ Page({
   createSimulationDataGugeji: function () {
     var categories = [];
     var data = [];
-    for (var i = 0; i < 12; i++) {
-      categories.push('2018-' + (i + 1));
-      data.push(this.data.records[i].gugeji);
+    for (var i = 0; i < records.length; i++) {
+      categories.push(util.formatTime(records[i].date));
+      data.push(records[i].gugeji);
     }
     // data[4] = null;
     return {
@@ -64,12 +81,27 @@ Page({
     }
   },
 
+  touchHandler: function (e) {
+    lineChart.scrollStart(e);
+  }, 
+  moveHandler: function (e) {
+    lineChart.scroll(e);
+  },
+  touchEndHandler: function (e) {
+    lineChart.scrollEnd(e);
+    lineChart.showToolTip(e, {
+      format: function (item, category) {
+        return category + ' ' + item.name + ':' + item.data
+      }
+    });
+  },
+
   createSimulationDataTizhilv: function () {
     var categories = [];
     var data = [];
-    for (var i = 0; i < 12; i++) {
-      categories.push('2018-' + (i + 1));
-      data.push(this.data.records[i].tizhilv);
+    for (var i = 0; i < records.length; i++) {
+      categories.push(util.formatTime(records[i].date));
+      data.push(records[i].tizhilv);
     }
     // data[4] = null;
     return {
@@ -92,6 +124,13 @@ Page({
     });
   },
   onLoad: function (e) {
+    records = getApp().globalData.records;
+    if (records == null) {
+      records = [];
+      return;  
+    }
+  },
+  onShow: function (e) {
     var windowWidth = 320;
     try {
       var res = wx.getSystemInfoSync();
@@ -109,26 +148,26 @@ Page({
       categories: simulationData.categories,
       animation: true,
       // background: '#f5f5f5',
-      series: [{
+      series: [{ 
         name: '体重',
         data: simulationData.data,
         format: function (val, name) {
           return val.toFixed(2) + 'kg';
         }
       }, {
-          name: '骨骼肌',
-          data: gugeji.data,
-          format: function (val, name) {
-            return val.toFixed(2) + 'kg';
-          }
-        },
-        {
-          name: '体脂率',
-          data: tizhilv.data,
-          format: function (val, name) {
-            return val.toFixed(2) + 'kg';
-          }
-        }],
+        name: '骨骼肌',
+        data: gugeji.data,
+        format: function (val, name) {
+          return val.toFixed(2) + 'kg';
+        }
+      },
+      {
+        name: '体脂率',
+        data: tizhilv.data,
+        format: function (val, name) {
+          return val.toFixed(2) + 'kg';
+        }
+      }],
       xAxis: {
         disableGrid: true
       },
@@ -143,73 +182,10 @@ Page({
       height: 200,
       dataLabel: false,
       dataPointShape: true,
+      enableScroll: true,
       extra: {
         lineStyle: 'curve'
       }
     });
-
-    // lineChart = new wxCharts({
-    //   canvasId: 'lineCanvasGugeji',
-    //   type: 'line',
-    //   categories: simulationData.categories,
-    //   animation: true,
-    //   // background: '#f5f5f5',
-    //   series: [{
-    //     name: '骨骼肌',
-    //     data: simulationData.data,
-    //     format: function (val, name) {
-    //       return val.toFixed(2) + 'kg';
-    //     }
-    //   }],
-    //   xAxis: {
-    //     disableGrid: true
-    //   },
-    //   yAxis: {
-    //     title: '',
-    //     format: function (val) {
-    //       return val.toFixed(2);
-    //     },
-    //     min: 0
-    //   },
-    //   width: windowWidth,
-    //   height: 200,
-    //   dataLabel: false,
-    //   dataPointShape: true,
-    //   extra: {
-    //     lineStyle: 'curve'
-    //   }
-    // });
-
-    // lineChart = new wxCharts({
-    //   canvasId: 'lineCanvasTizhilv',
-    //   type: 'line',
-    //   categories: simulationData.categories,
-    //   animation: true,
-    //   // background: '#f5f5f5',
-    //   series: [{
-    //     name: '体脂率',
-    //     data: simulationData.data,
-    //     format: function (val, name) {
-    //       return val.toFixed(2) + 'kg';
-    //     }
-    //   }],
-    //   xAxis: {
-    //     disableGrid: true
-    //   },
-    //   yAxis: {
-    //     title: '',
-    //     format: function (val) {
-    //       return val.toFixed(2);
-    //     },
-    //     min: 0
-    //   },
-    //   width: windowWidth,
-    //   height: 200,
-    //   dataLabel: false,
-    //   dataPointShape: true,
-    //   extra: {
-    //     lineStyle: 'curve'
-    //   }
-    // });
   }
 });

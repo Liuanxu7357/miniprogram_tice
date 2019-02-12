@@ -1,9 +1,7 @@
 <!--miniprogram/pages/trend/trend.wxml-->
 <view class="container">
-  <scroll-view scroll-y >
-    <canvas canvas-id="lineCanvasWeight" class="canvas" bindtouchstart="touchHandler"></canvas>
-    <canvas canvas-id="lineCanvasGugeji" class="canvas" bindtouchstart="touchHandler"></canvas>
-    <canvas canvas-id="lineCanvasTizhilv" class="canvas" bindtouchstart="touchHandler"></canvas>
-    <button type="primary" bindtap="updateData">更新数据</button>
-  </scroll-view>
+  <canvas canvas-id="lineCanvasWeight" disable-scroll="true" class="canvas"  bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
+  <!-- <canvas canvas-id="lineCanvasGugeji" class="canvas" bindtouchstart="touchHandler"></canvas> -->
+  <!-- <canvas canvas-id="lineCanvasTizhilv" class="canvas" bindtouchstart="touchHandler"></canvas> -->
+  <!-- <button type="primary" bindtap="updateData">更新数据</button> -->
 </view>

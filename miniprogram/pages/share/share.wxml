@@ -20,11 +20,11 @@
       <view style="height:100%; width:55%;">
         <view style="height: 50%; width: 100%;" class="item_line">
           <view style="font-size:45rpx;">骨骼肌：70kg</view>
-          <image style="height:66rpx; width:64rpx;" src="../../images/thumb_good.jpg"></image>
+          <image style="height:66rpx; width:64rpx;" src="../../images/thumb_up.png"></image>
         </view>
         <view style="height: 50%; width: 100%" class="item_line">
           <view style="font-size:45rpx;">体脂率：20.5</view>
-          <image style="height:66rpx; width:64rpx;" src="../../images/thumb_good.jpg"></image>
+          <image style="height:66rpx; width:64rpx;" src="../../images/thumb_up.png"></image>
         </view>
       </view>
     </view>
@@ -40,6 +40,7 @@
     </view>
   </scroll-view>
   <view style="height: 15vh; background: #014e4c" class="item_line">
-    <image style="height:112rpx; width:367rpx" src="../../images/share.jpg"></image>
+    <image hidden="{{true}}" bindtap="share" style="height:112rpx; width:367rpx" src="../../images/share.png" open-type="share"></image>
+    <button style="width:367rpx" open-type="share">分享给朋友</button>
   </view>
 </view>
