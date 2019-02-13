@@ -9,18 +9,24 @@
 //   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 // }
 
+function formatRange(third) {
+  return "(" + third.min + "-" + third.max + ")";
+}
+
 function formatTime(intdate) {
   var date = new Date(intdate);
   var Month = date.getMonth() + 1;
   var Day = date.getDate();
   var hours = date.getHours(); //计算剩余的小时
   var minutes = date.getMinutes(); //计算剩余的分钟
+  var seconds = date.getSeconds();
   var Y = date.getFullYear() + '-';
   var M = Month < 10 ? '0' + Month + '-' : Month + '-';
   var D = Day + 1 < 10 ? '0' + Day + '' : Day + '';
   var H = hours < 10 ? '0' + hours + ':' : hours + ':'
   var m = minutes < 10 ? '0' + minutes : minutes;
-  return M + D + " " + H + m;
+  var s = seconds < 10 ? '0' + seconds : seconds;
+  return M + D + " " + H + m + ":" + s;
 }
 
 const formatNumber = n => {
@@ -52,6 +58,7 @@ function randomNum(minNum, maxNum) {
 } 
 
 module.exports = {
+  formatRange: formatRange,
   formatTime: formatTime,
   randomNum: randomNum,
   bytesToHex: bytesToHex
