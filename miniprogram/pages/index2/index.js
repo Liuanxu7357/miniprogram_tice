@@ -46,10 +46,12 @@ Page({
     }
 
     // 才查询到20个数据项?
-    // oDoVK5NQOu7P9YLOuuwPJg724l2g
-    // oDoVK5HuP5Pz7G_BOWhOXVZX-IE4
+    // 最新三个月的 TODO: 当大于20个数据项时会有一些问题，需要能够分布加载；
+    let time = Date.now() - 7862400 * 1000;
     const db = wx.cloud.database();
+    const _ = db.command;
     db.collection('counters').where({
+      date: _.gt(time),
       _openid: app.globalData.userInfo.openid
     }).get({
       success: res => {
