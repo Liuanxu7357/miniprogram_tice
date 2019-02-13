@@ -137,31 +137,16 @@ Page({
    */
   onShareAppMessage: function (res) {
     console.log(res);
-    // console.log(this.data.hasUserInfo);
-    // if (this.data.hasUserInfo) {
-    //   let ta = this.data.userInfo.gender == 1 ? '他' : '她';
-    //   let title = this.data.userInfo.nickName + ' 分享给你' + ta + '朗诵的' + this.data.title_value;
-    //   let imageUrl = this.data.userInfo.avatarUrl;
-    //   return {
-    //     title: title,
-    //     desc: '快来听听吧！',
-    //     path: 'pages/index2/index?id=' + resultid + "&singer=" + this.data.userInfo.nickName + "&title=" + this.data.title_value,
-    //     imageUrl: imageUrl,
-    //     success: function (res) {
-    //       // 转发成功
-    //     },
-    //     fail: function (res) {
-    //       // 转发失败
-    //     }
-    //   }
-    // }
-
-    console.log(app.globalData.userInfo);
-
+    console.log(app.globalData.myUserInfo);
+    let obj = app.globalData.myUserInfo;
+    let urlParameters = Object
+      .keys(obj)
+      .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`)
+      .join('&');
     return {
       title: 'title',
       desc: '快来听听吧！',
-      path: 'pages/index2/index?type=' + 'share' + "&nickName=" + app.globalData.userInfo.nickName + "&shareid=" + app.globalData.openid,
+      path: 'pages/index2/index?type=' + '1' + "&" + urlParameters,
       imageUrl: 'imageUrl',
       success: function (res) {
         // 转发成功

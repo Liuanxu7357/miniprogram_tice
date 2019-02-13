@@ -11,6 +11,9 @@ App({
       })
     }
 
-    this.globalData = {}
+    this.globalData = {
+      userInfo: null, // 当前 (本人或者分享人)
+      myUserInfo: null, // 本人
+    }
   }
 })

@@ -24,7 +24,7 @@
 </scroll-view>
   <view style="height: 15vh; background: #014e4c" class="item_line">
     <!-- 开始按钮 -->
-    <button style="background-color: transparent;" open-type='getUserInfo' id='start' bindgetuserinfo='getUserInfo' class='imageBtn' bindtap='scan'>
+    <button style="background-color: transparent;" id='start' class='imageBtn' bindtap='scan'>
       <image style="height:78rpx; width:382rpx" src="../../images/get_report.png"></image>
     </button>
   </view> 

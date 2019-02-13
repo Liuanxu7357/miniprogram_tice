@@ -14,8 +14,8 @@ Page({
   // tap
   tap: function (e) {
     console.log(e);
-    console.log("tap:", this.data.userInfo);
-    if (this.data.userInfo == null) {
+    console.log("tap:", app.globalData.userInfo);
+    if (app.globalData.userInfo == null) {
       return;
     }
     
@@ -24,17 +24,29 @@ Page({
 
   // 进入
   gotoRecordlist: function (e) {
-    console.log("gotoRecordlist");
-    const db = wx.cloud.database()
     // 查询当前用户所有的 counters
-    console.log("getRecordlist2: " + app.globalData.openid);
-    if (app.globalData.openid == null) {
+    console.log("gotoRecordlist userInfo: ", app.globalData.userInfo);
+    console.log("gotoRecordlist myUserInfo: ", app.globalData.myUserInfo);
+
+    if (app.globalData.myUserInfo == null || app.globalData.myUserInfo.openid == null) {
+      console.warn("信息不全1");
+      return;
+    }
+
+    // 如果不是分享过来的，那么就将本人的clone进来
+    if (app.globalData.userInfo == null && app.globalData.myUserInfo.openid != null) {
+      app.globalData.userInfo = Object.assign({}, app.globalData.myUserInfo);
+    }
+
+    if (app.globalData.userInfo.openid == null) {
+      console.warn("信息不全2");
       return;
     }
 
     // 才查询到20个数据项?
+    const db = wx.cloud.database();
     db.collection('counters').where({
-      _openid: app.globalData.openid
+      _openid: app.globalData.userInfo.openid
     }).get({
       success: res => {
         this.setData({
@@ -42,12 +54,10 @@ Page({
         })
         console.log('[数据库] [查询记录] 成功: ', res)
 
-        // 赋值到全局变量上
-        // 重新排列数据
+        // 赋值到全局变量上 重新排列数据
         function sortDevices(a, b) {
           return b.date - a.date;
         };
-
         app.globalData.records = res.data.sort(sortDevices);
 
         // 进入
@@ -72,17 +82,16 @@ Page({
     console.log(e);
     let that = this;
 
-    // 1. 获取openid 和 昵称；
-    this.onGetOpenid();
-
     // 2. 获取传入参数，匹配启动类型；
     // 2.1 分享式启动；(参数需要传递openid, nickname等等)
     // 2.2 默认方式启动；
-    if (e.type != null && e.type == "share" && e.shareid != null) {
-      this.setData({ boot: { type: "share", shareid: e.shareid, shareNickName: e.nickName}});
+    if (e.type != null && e.type == "1" && e.openid != null) {
+      Object.keys(e).map(function (key, index) {
+        e[key] = decodeURIComponent(e[key]);
+      });
       this.setData({ text: "查看 " + e.nickName + " 的体测记录"});
-    } else {
-      this.setData({ boot: { type: "default", shareid: ""}});
+      // 当前用户（可以是本人，也可能是分享过来的）
+      app.globalData.userInfo = Object.assign({}, e);
     }
 
     if (!wx.cloud) {
@@ -103,81 +112,53 @@ Page({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
               })
-              that.gotoRecordlist();
-            }
+              this.onGetUserInfo({
+                detail: {
+                  userInfo: res.userInfo,
+                }
+              });
+            } 
           })
         }
       }
     })
   },
 
-  getRecordlist: function (e) {
-    const db = wx.cloud.database()
-    console.log("getRecordlist: " + app.globalData.openid);
-    return new Promise(function (resolve, reject) {
-      // 查询当前用户所有的 counters
-      console.log("getRecordlist2: " + app.globalData.openid);
-      if (app.globalData.openid == null) {
-        reject("fail");
-        return;
-      }
-
-      db.collection('counters').where({
-        _openid: app.globalData.openid
-      }).get({
-        success: res => {
-          this.setData({
-            queryResult: JSON.stringify(res.data, null, 2)
-          })
-          console.log('[数据库] [查询记录] 成功: ', res)
-          resolve('Success!');
-        },
-        fail: err => {
-          wx.showToast({
-            icon: 'none',
-            title: '查询记录失败'
-          })
-          console.error('[数据库] [查询记录] 失败：', err)
-          reject('Fail!');
-        }
-      })
-    });
-  },
-
   // 获取用户信息成功回调
+  // 唯一入口，获取完UserInfo获取OpenId
   onGetUserInfo: function(e) {
+    console.log("onGetUserInfo");
     if (!this.logged && e.detail.userInfo) {
       this.setData({
         logged: true,
         avatarUrl: e.detail.userInfo.avatarUrl,
         userInfo: e.detail.userInfo
       })
-
       // 将基本信息放到全局变量中
-      app.globalData.userInfo = e.detail.userInfo;
+      app.globalData.myUserInfo = Object.assign({}, e.detail.userInfo);
 
-      // 获取数据
-      this.gotoRecordlist();
+      // 1. 获取openid 和 昵称；
+      this.onGetOpenid();
     }
   },
 
   onGetOpenid: function() {
+    console.log("onGetOpenid");
+    let that = this;
     // 调用云函数
     wx.cloud.callFunction({
       name: 'login',
       data: {},
       success: res => {
         console.log('[云函数] [login] user openid: ', res.result.openid)
-        app.globalData.openid = res.result.openid
-        // wx.navigateTo({
-        //   url: '../userConsole/userConsole',
-        // })
+        app.globalData.myUserInfo = Object.assign({ openid: res.result.openid }, app.globalData.myUserInfo);
+        // 这里所有的信息都获取全了，可以跳了
+        if (app.globalData.userInfo == null || app.globalData.userInfo.type != "1") {
+          that.gotoRecordlist();
+        }
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
-        // wx.navigateTo({
-        //   url: '../deployFunctions/deployFunctions',
-        // })
       }
     })
   },
