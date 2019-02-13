@@ -103,15 +103,15 @@ Page({
       // 3. 身高
       height: this.third(170, 169, 180),
       // 4. 体重
-      weight2: this.third(25, 30, 40),
+      weight: this.third(util.randomNum(50, 120), 30, 40),
       // 5. 5k电阻 
       r5k: this.third(25, 30, 40),
       // 5. 50k电阻 
       r50k: this.third(25, 30, 40),
       // bmi
       bmi: this.third(20.1, 18.5, 24.1),
-      // 体脂肪率
-      tizhifanglv: this.third(29.6, 15, 20),
+      // 体脂率
+      tizhilv: this.third(29.6, 15, 20),
       // 体脂肪量
       tizhifangliang: this.third(18.9, 10.4, 13.9),
       // 肌肉量
@@ -126,7 +126,6 @@ Page({
       danbaizhiliang: this.third(9.6, 11.1, 12.4),
       // 无机盐量
       wujiyanliang: this.third(3.1, 3.8, 9.7),
-      weight: util.randomNum(50, 120),
       gugeji: util.randomNum(20, 40), 
       gugeji2: { cur: util.randomNum(50, 120), max: 130, min: 80 },
       tizhilv: util.randomNum(40, 60) };

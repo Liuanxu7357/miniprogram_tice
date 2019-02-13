@@ -68,8 +68,8 @@ Page({
       },
       {
         type: "体脂肪率",
-        value: record.tizhifanglv.cur,
-        range: util.formatRange(record.tizhifanglv),
+        value: record.tizhilv.cur,
+        range: util.formatRange(record.tizhilv),
       },
       {
         type: "体脂肪量",

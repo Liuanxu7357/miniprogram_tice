@@ -14,9 +14,9 @@
 <scroll-view scroll-y style="height: 78vh;" bindscrolltoupper="upper" bindscrolltolower="lower">
   <view hidden="{{records.length == 0}}" id="{{item._id}}" bindtap="onItemClick" class="item_line scroll_item_line" hover-class='item_line_hover' wx:for="{{records}}" wx:key="_id">
     <text style="width:40%;" class="item scroll_item">{{recordlist.formatTime(item.date)}}</text>
-    <text style="width:20%;" class="item scroll_item">{{item.weight2.cur}}</text>
+    <text style="width:20%;" class="item scroll_item">{{item.weight.cur}}</text>
     <text style="width:20%;" class="item scroll_item">{{item.gugejiliang.cur}}</text>
-    <text style="width:20%;" class="item scroll_item">{{item.tizhifanglv.cur}}</text>
+    <text style="width:20%;" class="item scroll_item">{{item.tizhilv.cur}}</text>
   </view>
   <!-- <view hidden="{{records.length == 0}}" style="height:100%; display: flex; align-items: center; vertical-align: center; justify-content: center;">
     <text style="font-size:25rpx; color:grey">暂无记录，请扫码添加记录</text>

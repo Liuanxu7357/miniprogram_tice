@@ -58,7 +58,7 @@ Page({
     var data = [];
     for (var i = 0; i < records.length; i++) {
       categories.push(util.formatTime(records[i].date));
-      data.push(records[i].weight2.cur);
+      data.push(records[i].weight.cur);
     }
     // data[4] = null;
     return {
@@ -101,7 +101,7 @@ Page({
     var data = [];
     for (var i = 0; i < records.length; i++) {
       categories.push(util.formatTime(records[i].date));
-      data.push(records[i].tizhifanglv.cur);
+      data.push(records[i].tizhilv.cur);
     }
     // data[4] = null;
     return {
