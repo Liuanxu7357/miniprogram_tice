@@ -63,48 +63,48 @@ Page({
     list.push(
       {
         type: "BMI",
-        value: "20",
-        range: "(20-30)",
+        value: record.bmi.cur,
+        range: util.formatRange(record.bmi),
       },
       {
         type: "体脂肪率",
-        value: record.tizhilv,
-        range: "(20-30)",
+        value: record.tizhifanglv.cur,
+        range: util.formatRange(record.tizhifanglv),
       },
       {
         type: "体脂肪量",
-        value: "20",
-        range: "(20-30)",
+        value: record.tizhifangliang.cur,
+        range: util.formatRange(record.tizhifangliang),
       },
       {
         type: "肌肉量",
-        value: "20",
-        range: "(20-30)",
+        value: record.jirouliang.cur,
+        range: util.formatRange(record.jirouliang),
       },
       {
         type: "骨骼肌量",
-        value: record.gugeji,
-        range: util.formatRange(record.gugeji2),
+        value: record.gugejiliang.cur,
+        range: util.formatRange(record.gugejiliang),
       },
       {
         type: "身体水分",
-        value: "20",
-        range: "(20-30)",
+        value: record.shentishuifen.cur,
+        range: util.formatRange(record.shentishuifen),
       },
       {
         type: "内脏面积",
-        value: "20",
-        range: "(20-30)",
+        value: record.neizangmianji.cur,
+        range: util.formatRange(record.neizangmianji),
       },
       {
         type: "蛋白质量",
-        value: "20",
-        range: "(20-30)",
+        value: record.danbaizhiliang.cur,
+        range: util.formatRange(record.danbaizhiliang),
       },
       {
-        type: "无肌盐",
-        value: "20",
-        range: "(20-30)",
+        type: "无肌盐量",
+        value: record.wujiyanliang.cur,
+        range: util.formatRange(record.wujiyanliang),
       });
     this.setData({
       listData: list,

@@ -90,16 +90,51 @@ Page({
     app.globalData.records = records;
   },
 
+  // 将原始数据存入进来？ 还是使用json，有点纠结；
+  // 可以两个都使用，但是原始数据暂时不使用，直接解析成json；
+  // 
   addrecord: function (e) {
     let record = {
-      id: 0,
       date: Date.now(), 
-      weight2: {cur: util.randomNum(50, 120), max: 130, min: 80},
+      // 1. 性别
+      gender: this.third(1, 1, 1),
+      // 2. 年龄
+      age: this.third(1, 1, 1),
+      // 3. 身高
+      height: this.third(170, 169, 180),
+      // 4. 体重
+      weight2: this.third(25, 30, 40),
+      // 5. 5k电阻 
+      r5k: this.third(25, 30, 40),
+      // 5. 50k电阻 
+      r50k: this.third(25, 30, 40),
+      // bmi
+      bmi: this.third(20.1, 18.5, 24.1),
+      // 体脂肪率
+      tizhifanglv: this.third(29.6, 15, 20),
+      // 体脂肪量
+      tizhifangliang: this.third(18.9, 10.4, 13.9),
+      // 肌肉量
+      jirouliang: this.third(41.8, 51.5, 55.5),
+      // 骨骼肌量
+      gugejiliang: this.third(27.6, 30.1, 39.8),
+      // 身体水分
+      shentishuifen: this.third(32.2, 40.1, 42.3),
+      // 内脏面积
+      neizangmianji: this.third(81.5, 0, 75),
+      // 蛋白质量
+      danbaizhiliang: this.third(9.6, 11.1, 12.4),
+      // 无机盐量
+      wujiyanliang: this.third(3.1, 3.8, 9.7),
       weight: util.randomNum(50, 120),
       gugeji: util.randomNum(20, 40), 
       gugeji2: { cur: util.randomNum(50, 120), max: 130, min: 80 },
       tizhilv: util.randomNum(40, 60) };
     this.onAdd(record);
+  },
+
+  third: function (cur, min, max) {
+    return { cur: cur, max: max, min: min };
   },
 
   scan: function (e) {
