@@ -88,6 +88,9 @@ Page({
     // this.setData({
     //   template: new Card().palette(),
     // });
+    this.setData({
+      userInfo: app.globalData.userInfo,
+    });
   }, 
 
   /**

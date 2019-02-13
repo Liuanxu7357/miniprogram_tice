@@ -86,7 +86,7 @@ Page({
 
     console.log(records.length);
 
-    getApp().globalData.records = records;
+    app.globalData.records = records;
   },
 
   scan: function (e) {
@@ -142,12 +142,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(Date.now());
-    let records = getApp().globalData.records;
+    let records = app.globalData.records;
     this.setData({
       records: records,
+      userInfo: app.globalData.userInfo,
     });
-    // getApp().globalData.records = this.data.records;
+    // app.globalData.records = this.data.records;
   },
 
   /**

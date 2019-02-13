@@ -22,7 +22,9 @@ Page({
     this.gotoRecordlist();
   },
 
-  // 进入
+  // oDoVK5HuP5Pz7G_BOWhOXVZX-IE4
+
+  // 第三步：跳转
   gotoRecordlist: function (e) {
     // 查询当前用户所有的 counters
     console.log("gotoRecordlist userInfo: ", app.globalData.userInfo);
@@ -44,6 +46,8 @@ Page({
     }
 
     // 才查询到20个数据项?
+    // oDoVK5NQOu7P9YLOuuwPJg724l2g
+    // oDoVK5HuP5Pz7G_BOWhOXVZX-IE4
     const db = wx.cloud.database();
     db.collection('counters').where({
       _openid: app.globalData.userInfo.openid
@@ -124,6 +128,7 @@ Page({
     })
   },
 
+  // 第一步：获取UserInfo
   // 获取用户信息成功回调
   // 唯一入口，获取完UserInfo获取OpenId
   onGetUserInfo: function(e) {
@@ -142,6 +147,7 @@ Page({
     }
   },
 
+  // 第二步：获取OpenId
   onGetOpenid: function() {
     console.log("onGetOpenid");
     let that = this;
