@@ -124,7 +124,11 @@ Page({
     });
   },
   onLoad: function (e) {
-    records = getApp().globalData.records;
+    // 这里需要正序
+    function sortDevices(a, b) {
+      return a.date - b.date;
+    };
+    records = getApp().globalData.records.sort(sortDevices);
     if (records == null) {
       records = [];
       return;  
