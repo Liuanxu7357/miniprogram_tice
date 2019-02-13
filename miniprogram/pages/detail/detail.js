@@ -1,5 +1,6 @@
 // miniprogram/pages/detail/detail.js
 const app = getApp();
+const util = require("../../utils/util.js");
 
 Page({
 
@@ -53,6 +54,11 @@ Page({
 
   onReuslt: function (record) {
     console.log("onResult: ", record);
+    // titile
+    wx.setNavigationBarTitle({
+      title: '体成分结果(' + util.formatTime(record.date) + ")",
+    })
+
     let list = [];
     list.push(
       {
