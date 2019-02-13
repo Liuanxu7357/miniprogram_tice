@@ -1,6 +1,7 @@
 // miniprogram/pages/recordlist/recordlist.js
 const channel = require("../../common/channel/channel.js");
 const util = require("../../utils/util.js");
+const Body = require('../../utils/body.js');
 const app = getApp();
 
 Page({
@@ -193,6 +194,8 @@ Page({
       records: records,
       userInfo: app.globalData.userInfo,
     });
+
+    let body = new Body();
     // app.globalData.records = this.data.records;
   },
 
