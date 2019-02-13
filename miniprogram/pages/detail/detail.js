@@ -84,7 +84,7 @@ Page({
       {
         type: "骨骼肌量",
         value: record.gugeji,
-        range: "(20-30)",
+        range: util.formatRange(record.gugeji2),
       },
       {
         type: "身体水分",

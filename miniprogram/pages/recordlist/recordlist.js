@@ -91,7 +91,14 @@ Page({
   },
 
   addrecord: function (e) {
-    let record = { id: 0, date: Date.now(), weight: util.randomNum(50, 120), gugeji: util.randomNum(20, 40), tizhilv: util.randomNum(40, 60) };
+    let record = {
+      id: 0,
+      date: Date.now(), 
+      weight2: {cur: util.randomNum(50, 120), max: 130, min: 80},
+      weight: util.randomNum(50, 120),
+      gugeji: util.randomNum(20, 40), 
+      gugeji2: { cur: util.randomNum(50, 120), max: 130, min: 80 },
+      tizhilv: util.randomNum(40, 60) };
     this.onAdd(record);
   },
 
