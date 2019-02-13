@@ -83,8 +83,8 @@ Page({
       },
       {
         type: "骨骼肌量",
-        value: record.gugejiliang.cur,
-        range: util.formatRange(record.gugejiliang),
+        value: record.gugeji.cur,
+        range: util.formatRange(record.gugeji),
       },
       {
         type: "身体水分",

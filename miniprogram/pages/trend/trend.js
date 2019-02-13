@@ -72,7 +72,7 @@ Page({
     var data = [];
     for (var i = 0; i < records.length; i++) {
       categories.push(util.formatTime(records[i].date));
-      data.push(records[i].gugejiliang.cur);
+      data.push(records[i].gugeji.cur);
     }
     // data[4] = null;
     return {

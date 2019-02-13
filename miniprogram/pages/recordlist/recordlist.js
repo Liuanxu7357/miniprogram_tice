@@ -104,10 +104,6 @@ Page({
       height: this.third(170, 169, 180),
       // 4. 体重
       weight: this.third(util.randomNum(50, 120), 30, 40),
-      // 5. 5k电阻 
-      r5k: this.third(25, 30, 40),
-      // 5. 50k电阻 
-      r50k: this.third(25, 30, 40),
       // bmi
       bmi: this.third(20.1, 18.5, 24.1),
       // 体脂率
@@ -117,7 +113,7 @@ Page({
       // 肌肉量
       jirouliang: this.third(41.8, 51.5, 55.5),
       // 骨骼肌量
-      gugejiliang: this.third(27.6, 30.1, 39.8),
+      gugeji: this.third(27.6, 30.1, 39.8),
       // 身体水分
       shentishuifen: this.third(32.2, 40.1, 42.3),
       // 内脏面积
@@ -125,11 +121,9 @@ Page({
       // 蛋白质量
       danbaizhiliang: this.third(9.6, 11.1, 12.4),
       // 无机盐量
-      wujiyanliang: this.third(3.1, 3.8, 9.7),
-      gugeji: util.randomNum(20, 40), 
-      gugeji2: { cur: util.randomNum(50, 120), max: 130, min: 80 },
-      tizhilv: util.randomNum(40, 60) };
-    this.onAdd(record);
+      wujiyanliang: this.third(3.1, 3.8, 9.7), 
+      database64: "xxxxxxx"};
+    this.onAdd(record); 
   },
 
   third: function (cur, min, max) {
