@@ -56,7 +56,10 @@ Page({
         wx.showToast({
           title: '新增记录成功',
         })
-        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id);
+        record._id = res._id;
+
+        this.onAddSuccess(record);
       },
       fail: err => {
         wx.showToast({
@@ -68,10 +71,8 @@ Page({
     })
   },
 
-  addrecord: function (e) {
+  onAddSuccess: function (record) {
     let records = this.data.records;
-    let record = { id: 0, date: Date.now(), weight: util.randomNum(50, 120), gugeji: util.randomNum(20, 40), tizhilv: util.randomNum(40, 60) };
-    this.onAdd(record);
     records.push(record);
 
     // 将records按照从大到小排序一下
@@ -87,6 +88,11 @@ Page({
     console.log(records.length);
 
     app.globalData.records = records;
+  },
+
+  addrecord: function (e) {
+    let record = { id: 0, date: Date.now(), weight: util.randomNum(50, 120), gugeji: util.randomNum(20, 40), tizhilv: util.randomNum(40, 60) };
+    this.onAdd(record);
   },
 
   scan: function (e) {
@@ -119,8 +125,13 @@ Page({
     });
   },
 
+  // 点击其中一项进入详情页面
   onItemClick: function (e) {
     console.log(e);
+    // 将id传递进来
+    wx.navigateTo({
+      url: '../detail/detail?id=' + e.currentTarget.id,
+    })
   },
 
   // 选择通道
