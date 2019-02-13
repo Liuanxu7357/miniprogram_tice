@@ -147,8 +147,7 @@ Page({
       .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`)
       .join('&');
     return {
-      title: 'title',
-      desc: '快来听听吧！',
+      title: "分享给你 " + obj.nickName + " 的体测记录",
       path: 'pages/index2/index?type=' + '1' + "&" + urlParameters,
       imageUrl: 'imageUrl',
       success: function (res) {
