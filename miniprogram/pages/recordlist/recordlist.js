@@ -1,7 +1,7 @@
 // miniprogram/pages/recordlist/recordlist.js
 const channel = require("../../common/channel/channel.js");
 const util = require("../../utils/util.js");
-const Body = require('../../utils/body.js');
+const Record = require('../../utils/record.js');
 const app = getApp();
 
 Page({
@@ -79,7 +79,7 @@ Page({
     // 将records按照从大到小排序一下
     // 重新排列数据
     function sortDevices(a, b) {
-      return b.date - a.date;
+      return b.qr.date - a.qr.date;
     };
 
     this.setData({
@@ -95,36 +95,45 @@ Page({
   // 可以两个都使用，但是原始数据暂时不使用，直接解析成json；
   // 
   addrecord: function (e) {
-    let record = {
-      date: Date.now(), 
-      // 1. 性别
-      gender: this.third(1, 1, 1),
-      // 2. 年龄
-      age: this.third(1, 1, 1),
-      // 3. 身高
-      height: this.third(170, 169, 180),
-      // 4. 体重
-      weight: this.third(util.randomNum(50, 120), 30, 40),
-      // bmi
-      bmi: this.third(20.1, 18.5, 24.1),
-      // 体脂率
-      tizhilv: this.third(29.6, 15, 20),
-      // 体脂肪量
-      tizhifangliang: this.third(18.9, 10.4, 13.9),
-      // 肌肉量
-      jirouliang: this.third(41.8, 51.5, 55.5),
-      // 骨骼肌量
-      gugeji: this.third(27.6, 30.1, 39.8),
-      // 身体水分
-      shentishuifen: this.third(32.2, 40.1, 42.3),
-      // 内脏面积
-      neizangmianji: this.third(81.5, 0, 75),
-      // 蛋白质量
-      danbaizhiliang: this.third(9.6, 11.1, 12.4),
-      // 无机盐量
-      wujiyanliang: this.third(3.1, 3.8, 9.7), 
-      database64: "xxxxxxx"};
-    this.onAdd(record); 
+    // let record = {
+    //   date: Date.now(), 
+    //   // 1. 性别
+    //   gender: this.third(1, 1, 1),
+    //   // 2. 年龄
+    //   age: this.third(1, 1, 1),
+    //   // 3. 身高
+    //   height: this.third(170, 169, 180),
+    //   // 4. 体重
+    //   weight: this.third(util.randomNum(50, 120), 30, 40),
+    //   // bmi
+    //   bmi: this.third(20.1, 18.5, 24.1),
+    //   // 体脂率
+    //   tizhilv: this.third(29.6, 15, 20),
+    //   // 体脂肪量
+    //   tizhifangliang: this.third(18.9, 10.4, 13.9),
+    //   // 肌肉量
+    //   jirouliang: this.third(41.8, 51.5, 55.5),
+    //   // 骨骼肌量
+    //   gugeji: this.third(27.6, 30.1, 39.8),
+    //   // 身体水分
+    //   shentishuifen: this.third(32.2, 40.1, 42.3),
+    //   // 内脏面积
+    //   neizangmianji: this.third(81.5, 0, 75),
+    //   // 蛋白质量
+    //   danbaizhiliang: this.third(9.6, 11.1, 12.4),
+    //   // 无机盐量
+    //   wujiyanliang: this.third(3.1, 3.8, 9.7), 
+    //   database64: "xxxxxxx"};
+    let qrjson = {
+      "date": Date.now(),
+      "tel": '010-32347372',
+      "addr": '昌平xxx街道xxx路xxxx号',
+      "score": 90,
+      "database64": "AAAAAAAAAAAAAAAAAAAAAAAAAAABKKQGIAOdGn0WUAB0C0gLZQH5CXgJExVTEwAAAAAAewIWArUCMwL8ARsC7QBfAH8AEALVAfUBLwEKAUoBmQFtAYQBdwBkAHEAIyQmAIEAjwCjABgB9QAJASMfISQfIRkB6gD5AFYAVgBcAFoAVgBcAA8GCA4GCIwALwA/ACMRFyERF+sEhANMBBQBuQDwACgBlgDIAEAEPgRdBLEDXVBaHx4jAwTwBKQCK6WAfoArgA8H3Ao="
+    }
+    let record = new Record(qrjson).getJson();
+    console.log(record);
+    this.onAdd(record);
   },
 
   third: function (cur, min, max) {
@@ -195,7 +204,8 @@ Page({
       userInfo: app.globalData.userInfo,
     });
 
-    let body = new Body();
+    let record = new Record().getJson();
+    console.log(record);
     // app.globalData.records = this.data.records;
   },
 

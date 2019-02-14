@@ -57,7 +57,18 @@ function randomNum(minNum, maxNum) {
   }
 } 
 
+/**
+ * array转换成16进制字符串
+ */
+function bytesToHex(byteArray) {
+  return Array.from(byteArray, function (byte) {
+    return ('0' + (byte & 0xFF).toString(16).toUpperCase()).slice(-2);
+  }).join(' ')
+}
+
+
 module.exports = {
+  bytesToHex: bytesToHex,
   formatRange: formatRange,
   formatTime: formatTime,
   randomNum: randomNum,

@@ -18,7 +18,7 @@ const xxx = [
     0x00, 0x28, 0x01, 0x96, 0x00, 0xC8, 0x00, 0x40, 0x04, 0x3E, 0x04, 0x5D,
     0x04, 0xB1, 0x03, 0x5D, 0x50, 0x5A, 0x1F, 0x1E, 0x23, 0x03, 0x04, 0xF0,
     0x04, 0xA4, 0x02, 0x2B, 0xA5, 0x80, 0x7E, 0x80, 0x2B, 0x80, 0x0F, 0x07,
-    0xDC, 0x0A, 0x81, 0xA8
+    0xDC, 0x0A, /*0x81, 0xA8*/
 ];
 
 const UNIT_KG      = "kg";
@@ -201,6 +201,8 @@ function parse(t, data) {
   return true;
 }
 
+let json = "";
+
 var Body = function Body(data) {
   if (data == null) {
     data = xxx;
@@ -256,59 +258,60 @@ var Body = function Body(data) {
   // 转换成json对象
   // 体重/骨骼肌/体脂率/BMI/体脂肪量/肌肉量/身体水分/内脏面积/蛋白质/无机盐
   let mpjson = {
-    "体重": {
+    "weight": {
       cur: 体重.cur,
       min: 体重.min,
       max: 体重.max,
     },
-    "骨骼肌": {
+    "gugeji": {
       cur: 骨骼肌.cur,
       min: 骨骼肌.min,
       max: 骨骼肌.max,
     },
-    "体脂百分比": {
+    "tizhilv": {
       cur: 体脂百分比.cur,
       min: 体脂百分比.min,
       max: 体脂百分比.max,
     },
-    "体脂肪量": {
+    "tizhifangliang": {
       cur: 体脂肪量.cur,
       min: 体脂肪量.min,
       max: 体脂肪量.max,
     },
-    "肌肉量": {
+    "jirouliang": {
       cur: 肌肉量.cur,
       min: 肌肉量.min,
       max: 肌肉量.max,
     },
-    "身体水分": {
+    "shentishuifen": {
       cur: 身体水分.cur,
       min: 身体水分.min,
       max: 身体水分.max,
     },
-    "内脏面积": {
+    "neizangmianji": {
       cur: 内脏面积.cur,
       min: 内脏面积.min,
       max: 内脏面积.max,
     },
-    "蛋白质": {
+    "danbaizhi": {
       cur: 蛋白质.cur,
       min: 蛋白质.min,
       max: 蛋白质.max,
     },
-    "无机盐": {
+    "wujiyan": {
       cur: 无机盐.cur,
       min: 无机盐.min,
       max: 无机盐.max,
     }
   }
 
-  let json = {
-    mp: mpjson,
-  }
+  json = mpjson;
   // json: qr:{database64:sfaljs===}, mp:{"无机盐":{min: 22.2, max: 22,3, cur: 23.2}}
-
   console.log(json);
+};
+
+Body.prototype.getMpJson = function () {
+  return json
 };
 
 module.exports = Body;

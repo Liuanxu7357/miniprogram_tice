@@ -50,8 +50,9 @@ Page({
     let time = Date.now() - 7862400 * 1000;
     const db = wx.cloud.database();
     const _ = db.command;
+    console.log("Date.now(): " + Date.now());
     db.collection('counters').where({
-      date: _.gt(time),
+      'qr.date': _.gt(time),
       _openid: app.globalData.userInfo.openid
     }).get({
       success: res => {
@@ -62,7 +63,7 @@ Page({
 
         // 赋值到全局变量上 重新排列数据
         function sortDevices(a, b) {
-          return b.date - a.date;
+          return b.qr.date - a.qr.date;
         };
         app.globalData.records = res.data.sort(sortDevices);
 

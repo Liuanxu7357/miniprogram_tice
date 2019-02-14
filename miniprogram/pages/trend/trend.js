@@ -57,8 +57,8 @@ Page({
     var categories = [];
     var data = [];
     for (var i = 0; i < records.length; i++) {
-      categories.push(util.formatTime(records[i].date));
-      data.push(records[i].weight.cur);
+      categories.push(util.formatTime(records[i].qr.date));
+      data.push(records[i].mp.weight.cur);
     }
     // data[4] = null;
     return {
@@ -71,8 +71,8 @@ Page({
     var categories = [];
     var data = [];
     for (var i = 0; i < records.length; i++) {
-      categories.push(util.formatTime(records[i].date));
-      data.push(records[i].gugeji.cur);
+      categories.push(util.formatTime(records[i].qr.date));
+      data.push(records[i].mp.gugeji.cur);
     }
     // data[4] = null;
     return {
@@ -100,8 +100,8 @@ Page({
     var categories = [];
     var data = [];
     for (var i = 0; i < records.length; i++) {
-      categories.push(util.formatTime(records[i].date));
-      data.push(records[i].tizhilv.cur);
+      categories.push(util.formatTime(records[i].qr.date));
+      data.push(records[i].mp.tizhilv.cur);
     }
     // data[4] = null;
     return {
@@ -126,7 +126,7 @@ Page({
   onLoad: function (e) {
     // 这里需要正序
     function sortDevices(a, b) {
-      return a.date - b.date;
+      return a.qr.date - b.qr.date;
     };
     records = getApp().globalData.records.sort(sortDevices);
     if (records == null) {
