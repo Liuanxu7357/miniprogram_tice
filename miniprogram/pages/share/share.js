@@ -47,6 +47,56 @@ Page({
     })
   },
 
+  checkgugeji: function (gugeji) {
+    console.log("share.wxs: gugeji");
+    console.log(gugeji);
+    if (gugeji == null) {
+      console.warn("gugeji == null");
+      return 0;
+    }
+    let max = gugeji.max;
+    let min = gugeji.min;
+    let cur = gugeji.cur;
+    if (min == null || max == null || cur == null) {
+      console.warn("min/max/cur == null");
+      return 0;
+    }
+
+    let center = min + (max - min) / 2;
+    if (cur < min) { // 包含吗？
+      return -1;
+    } else if (cur < center) { // 包含吗？
+      return 0;
+    } else {
+      return 1;
+    }
+  },
+
+  checkTizhilv: function(tizhilv) {
+    console.log("share.wxs: tizhilv");
+
+    if (tizhilv == null) {
+      console.warn("tizhilv == null");
+      return 0;
+    }
+    let max = tizhilv.max;
+    let min = tizhilv.min;
+    let cur = tizhilv.cur;
+    if (min == null || max == null || cur == null) {
+      console.warn("min/max/cur == null");
+      return 0;
+    }
+
+    let center = min + (max - min) / 2;
+    if (cur < center) { // 包含吗？
+      return 1;
+    } else if (cur < max) { // 包含吗？
+      return 0;
+    } else {
+      return -1;
+    }
+  },
+
   share: function (e) {
     console.log(e);
     // wx.showShareMenu({
@@ -117,30 +167,32 @@ Page({
     let record = records[0];
     // 如果长度为0那么显示一个无效的
     // TODO
-    if (record == null) {
-      record = {
-        qr: {
-          date: Date.now(),
-          addr: "无",
-          tel: "无"
-        },
-        mp: {
-          gugeji: {
-            min: "无",
-            max: "无",
-            cur: "无"
-          },
-          tizhilv: {
-            min: "无",
-            max: "无",
-            cur: "无"
-          }
-        },
-      }
-    }
+    // if (record == null) {
+    //   record = {
+    //     qr: {
+    //       date: Date.now(),
+    //       addr: "无",
+    //       tel: "无"
+    //     },
+    //     mp: {
+    //       gugeji: {
+    //         min: "无",
+    //         max: "无",
+    //         cur: "无"
+    //       },
+    //       tizhilv: {
+    //         min: "无",
+    //         max: "无",
+    //         cur: "无"
+    //       }
+    //     },
+    //   }
+    // }
 
     // 取出最后一个
     this.setData({
+      tizhilvSate: this.checkTizhilv(record.mp.tizhilv),
+      gugejiState: this.checkgugeji(record.mp.gugeji),
       record: record,
       date: util.formatTime(record.qr.date)
     });
