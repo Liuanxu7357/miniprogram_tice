@@ -109,7 +109,11 @@ Page({
     function sortDevices(a, b) {
       return b.qr.date - a.qr.date;
     };
-    let records = getApp().globalData.records.sort(sortDevices);
+    let grecords = getApp().globalData.records;
+    let records = [];  
+    if (grecords != null && grecords.length != 0) {
+      records = grecords.sort(sortDevices);
+    }
     let record = records[0];
     // 如果长度为0那么显示一个无效的
     // TODO

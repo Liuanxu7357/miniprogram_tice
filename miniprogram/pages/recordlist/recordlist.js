@@ -204,8 +204,8 @@ Page({
       userInfo: app.globalData.userInfo,
     });
 
-    let record = new Record().getJson();
-    console.log(record);
+    // let record = new Record().getJson();
+    // console.log(record);
     // app.globalData.records = this.data.records;
   },
 
@@ -220,7 +220,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log("onShow");
   },
 
   /**

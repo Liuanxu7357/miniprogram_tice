@@ -18,9 +18,9 @@
     <text style="width:20%;" class="item scroll_item">{{item.mp.gugeji.cur}}</text>
     <text style="width:20%;" class="item scroll_item">{{item.mp.tizhilv.cur}}</text>
   </view>
-  <!-- <view hidden="{{records.length == 0}}" style="height:100%; display: flex; align-items: center; vertical-align: center; justify-content: center;">
+  <view wx:if="{{records.length == 0}}" style="height:100%; display: flex; align-items: center; vertical-align: center; justify-content: center;">
     <text style="font-size:25rpx; color:grey">暂无记录，请扫码添加记录</text>
-  </view> -->
+  </view>
 </scroll-view>
   <view style="height: 15vh; background: #014e4c" class="item_line">
     <!-- 开始按钮 -->
