@@ -1,5 +1,6 @@
 // miniprogram/pages/recordlist/recordlist.js
 const channel = require("../../common/channel/channel.js");
+const util = require("../../utils/util.js");
 const app = getApp();
 import Card from '../../palette/card';
 
@@ -104,7 +105,41 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // 这里需要倒序
+    function sortDevices(a, b) {
+      return b.qr.date - a.qr.date;
+    };
+    let records = getApp().globalData.records.sort(sortDevices);
+    let record = records[0];
+    // 如果长度为0那么显示一个无效的
+    // TODO
+    if (record == null) {
+      record = {
+        qr: {
+          date: Date.now(),
+          addr: "无",
+          tel: "无"
+        },
+        mp: {
+          gugeji: {
+            min: "无",
+            max: "无",
+            cur: "无"
+          },
+          tizhilv: {
+            min: "无",
+            max: "无",
+            cur: "无"
+          }
+        },
+      }
+    }
 
+    // 取出最后一个
+    this.setData({
+      record: record,
+      date: util.formatTime(record.qr.date)
+    });
   },
 
   /**

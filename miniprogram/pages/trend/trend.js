@@ -124,6 +124,9 @@ Page({
     });
   },
   onLoad: function (e) {
+
+  },
+  onShow: function (e) {
     // 这里需要正序
     function sortDevices(a, b) {
       return a.qr.date - b.qr.date;
@@ -131,10 +134,9 @@ Page({
     records = getApp().globalData.records.sort(sortDevices);
     if (records == null) {
       records = [];
-      return;  
+      return;
     }
-  },
-  onShow: function (e) {
+
     var windowWidth = 320;
     try {
       var res = wx.getSystemInfoSync();

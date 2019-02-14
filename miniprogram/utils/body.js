@@ -1,3 +1,4 @@
+const util = require("../utils/util.js");
 
 // 默认数据
 const xxx = [
@@ -302,6 +303,56 @@ var Body = function Body(data) {
       cur: 无机盐.cur,
       min: 无机盐.min,
       max: 无机盐.max,
+    }
+  }
+
+  // 模拟数据
+  // util.randomNum(50, 120)
+  mpjson = {
+    "weight": {
+      cur: util.randomNum(50, 120),
+      min: util.randomNum(50, 120),
+      max: util.randomNum(50, 120),
+    },
+    "gugeji": {
+      cur: util.randomNum(50, 120),
+      min: util.randomNum(50, 120),
+      max: util.randomNum(50, 120),
+    },
+    "tizhilv": {
+      cur: util.randomNum(50, 120),
+      min: util.randomNum(50, 120),
+      max: util.randomNum(50, 120),
+    },
+    "tizhifangliang": {
+      cur: util.randomNum(50, 120),
+      min: util.randomNum(50, 120),
+      max: util.randomNum(50, 120),
+    },
+    "jirouliang": {
+      cur: util.randomNum(50, 120),
+      min: util.randomNum(50, 120),
+      max: util.randomNum(50, 120),
+    },
+    "shentishuifen": {
+      cur: util.randomNum(50, 120),
+      min: util.randomNum(50, 120),
+      max: util.randomNum(50, 120),
+    },
+    "neizangmianji": {
+      cur: util.randomNum(50, 120),
+      min: util.randomNum(50, 120),
+      max: util.randomNum(50, 120),
+    },
+    "danbaizhi": {
+      cur: util.randomNum(50, 120),
+      min: util.randomNum(50, 120),
+      max: util.randomNum(50, 120),
+    },
+    "wujiyan": {
+      cur: util.randomNum(50, 120),
+      min: util.randomNum(50, 120),
+      max: util.randomNum(50, 120),
     }
   }
 
