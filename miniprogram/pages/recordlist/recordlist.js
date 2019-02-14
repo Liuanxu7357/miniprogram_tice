@@ -124,16 +124,30 @@ Page({
     //   // 无机盐量
     //   wujiyanliang: this.third(3.1, 3.8, 9.7), 
     //   database64: "xxxxxxx"};
-    let qrjson = {
-      "date": Date.now(),
-      "tel": '010-32347372',
-      "addr": '昌平xxx街道xxx路xxxx号',
-      "score": 90,
-      "database64": "AAAAAAAAAAAAAAAAAAAAAAAAAAABKKQGIAOdGn0WUAB0C0gLZQH5CXgJExVTEwAAAAAAewIWArUCMwL8ARsC7QBfAH8AEALVAfUBLwEKAUoBmQFtAYQBdwBkAHEAIyQmAIEAjwCjABgB9QAJASMfISQfIRkB6gD5AFYAVgBcAFoAVgBcAA8GCA4GCIwALwA/ACMRFyERF+sEhANMBBQBuQDwACgBlgDIAEAEPgRdBLEDXVBaHx4jAwTwBKQCK6WAfoArgA8H3Ao="
+    let qrjson = null;
+    try {
+      qrjson = JSON.parse(e);
+      if (qrjson == null) {
+        wx.showToast({
+          duration: 2000,
+          title: '添加失败，二维码有误',
+          image: '/images/fail.png',
+        })
+        return;
+      }
+      console.log(JSON.stringify(record));
+      let record = new Record(qrjson).getJson();
+      console.log(record);
+      this.onAdd(record);
+    } catch(error) {
+      console.warn(error);
+      wx.showToast({
+        duration: 2000,
+        title: '添加失败，二维码有误',
+        image: '/images/fail.png',
+      })
+      return;
     }
-    let record = new Record(qrjson).getJson();
-    console.log(record);
-    this.onAdd(record);
   },
 
   third: function (cur, min, max) {
@@ -143,22 +157,17 @@ Page({
   scan: function (e) {
     let that = this;
     
-    // 判断是否已经获取用户ID，否则不进行扫码
-    if (app.globalData.userInfo == null) {
+    if (app.globalData.debug) {
+      let qrjson = {
+        "date": Date.now(),
+        "tel": '010-32347372',
+        "addr": '昌平xxx街道xxx路xxxx号',
+        "score": 90,
+        "database64": "AAAAAAAAAAAAAAAAAAAAAAAAAAABKKQGIAOdGn0WUAB0C0gLZQH5CXgJExVTEwAAAAAAewIWArUCMwL8ARsC7QBfAH8AEALVAfUBLwEKAUoBmQFtAYQBdwBkAHEAIyQmAIEAjwCjABgB9QAJASMfISQfIRkB6gD5AFYAVgBcAFoAVgBcAA8GCA4GCIwALwA/ACMRFyERF+sEhANMBBQBuQDwACgBlgDIAEAEPgRdBLEDXVBaHx4jAwTwBKQCK6WAfoArgA8H3Ao="
+      }
+      that.onScanOk(JSON.stringify(qrjson));
       return;
     }
-
-    wx.showModal({
-      title: '添加记录',
-      content: '确定要添加本条记录？',
-      success(res) {
-        if (res.confirm) {
-          // 点击确定，添加一条记录
-          that.addrecord();
-        }
-      }
-    });
-    return;
     
     // 只允许从相机扫码
     wx.scanCode({
@@ -166,6 +175,22 @@ Page({
       success(res) {
         // 将记录保存下来
         console.log(res)
+        that.onScanOk(res.result);
+      }
+    });
+  },
+
+  onScanOk: function (e) {
+    let that = this;
+    wx.showModal({
+      title: '添加记录',
+      content: '确定要添加本条记录？',
+      success(res) {
+        if (res.confirm) {
+          // 点击确定，添加一条记录
+          // 将json转换成obj
+          that.addrecord(e);
+        }
       }
     });
   },
