@@ -44,7 +44,7 @@
         <view style="height: 50%; width: 100%" class="item_line">
           <view>
             <view style="font-size:45rpx;">体脂率：</view>
-            <view style="font-size:45rpx;">{{record.mp.tizhilv.cur}}%({{record.mp.tizhilv.min}}-{{record.mp.tizhilv.max}})</view>
+            <view style="font-size:45rpx;">{{record.mp.tizhilv.cur}}%({{record.mp.tizhilv.min}}%-{{record.mp.tizhilv.max}}%)</view>
           </view>
           <image wx:if="{{tizhilvSate == 1}}" style="height:66rpx; width:64rpx;" src="../../images/thumb_up.png"></image>
           <image wx:if="{{tizhilvSate == -1}}" style="height:66rpx; width:64rpx;" src="../../images/thumb_down.png"></image>
