@@ -259,6 +259,11 @@ var Body = function Body(data) {
   // 转换成json对象
   // 体重/骨骼肌/体脂率/BMI/体脂肪量/肌肉量/身体水分/内脏面积/蛋白质/无机盐
   let mpjson = {
+    "bmi": {
+      cur: BMI.cur,
+      min: BMI.min,
+      max: BMI.max,
+    },
     "weight": {
       cur: 体重.cur,
       min: 体重.min,
@@ -310,6 +315,11 @@ var Body = function Body(data) {
   // util.randomNum(50, 120)
   if (getApp().globalData.debug) {
     mpjson = {
+      "bmi": {
+        cur: util.randomNum(50, 120),
+        min: util.randomNum(50, 120),
+        max: util.randomNum(50, 120),
+      },
       "weight": {
         cur: util.randomNum(50, 120),
         min: util.randomNum(50, 120),

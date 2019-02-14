@@ -56,55 +56,55 @@ Page({
     console.log("onResult: ", record);
     // titile
     wx.setNavigationBarTitle({
-      title: '体成分结果(' + util.formatTime(record.date) + ")",
+      title: '体成分结果(' + util.formatTime(record.qr.date) + ")",
     })
 
     let list = [];
     list.push(
       {
         type: "BMI",
-        value: record.bmi.cur,
-        range: util.formatRange(record.bmi),
+        value: record.mp.bmi.cur,
+        range: util.formatRange(record.mp.bmi),
       },
       {
         type: "体脂肪率",
-        value: record.tizhilv.cur,
-        range: util.formatRange(record.tizhilv),
+        value: record.mp.tizhilv.cur,
+        range: util.formatRange(record.mp.tizhilv),
       },
       {
         type: "体脂肪量",
-        value: record.tizhifangliang.cur,
-        range: util.formatRange(record.tizhifangliang),
+        value: record.mp.tizhifangliang.cur,
+        range: util.formatRange(record.mp.tizhifangliang),
       },
       {
         type: "肌肉量",
-        value: record.jirouliang.cur,
-        range: util.formatRange(record.jirouliang),
+        value: record.mp.jirouliang.cur,
+        range: util.formatRange(record.mp.jirouliang),
       },
       {
         type: "骨骼肌量",
-        value: record.gugeji.cur,
-        range: util.formatRange(record.gugeji),
+        value: record.mp.gugeji.cur,
+        range: util.formatRange(record.mp.gugeji),
       },
       {
         type: "身体水分",
-        value: record.shentishuifen.cur,
-        range: util.formatRange(record.shentishuifen),
+        value: record.mp.shentishuifen.cur,
+        range: util.formatRange(record.mp.shentishuifen),
       },
       {
         type: "内脏面积",
-        value: record.neizangmianji.cur,
-        range: util.formatRange(record.neizangmianji),
+        value: record.mp.neizangmianji.cur,
+        range: util.formatRange(record.mp.neizangmianji),
       },
       {
         type: "蛋白质量",
-        value: record.danbaizhiliang.cur,
-        range: util.formatRange(record.danbaizhiliang),
+        value: record.mp.danbaizhi.cur,
+        range: util.formatRange(record.mp.danbaizhi),
       },
       {
         type: "无肌盐量",
-        value: record.wujiyanliang.cur,
-        range: util.formatRange(record.wujiyanliang),
+        value: record.mp.wujiyan.cur,
+        range: util.formatRange(record.mp.wujiyan),
       });
     this.setData({
       listData: list,
