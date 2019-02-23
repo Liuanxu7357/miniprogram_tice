@@ -246,6 +246,9 @@ Page({
    */
   onShow: function () {
     console.log("onShow");
+    this.setData({
+      records: app.globalData.records,
+    });
   },
 
   /**

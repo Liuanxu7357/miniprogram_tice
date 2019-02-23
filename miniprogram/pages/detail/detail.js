@@ -1,6 +1,7 @@
 // miniprogram/pages/detail/detail.js
 const app = getApp();
 const util = require("../../utils/util.js");
+let index = 0;
 
 Page({
 
@@ -19,9 +20,11 @@ Page({
   onLoad: function (options) {
     // 查询出当前记录
     let records = app.globalData.records;
-    var record = records.find(function (element) {
+    index = records.findIndex(function (element) {
       return element._id == options.id;
     });
+
+    var record = records[index];
 
     // 先在本地查询，本地没有的话，查网络
     if (record != null) {
@@ -107,9 +110,55 @@ Page({
         range: util.formatRange(record.mp.wujiyan),
       });
     this.setData({
+      record: record,
       listData: list,
     });
     console.log(record);
+  },
+
+  deleteCurRecord: function(e) {
+    console.log("deleteCurRecord");
+    let _this = this;
+    wx.showModal({
+      title: '删除记录',
+      content: '确定要删除本条记录？',
+      success(res) {
+        if (res.confirm) {
+          // 点击确定，添加一条记录
+          // 将json转换成obj
+          _this.onDel(e);
+        }
+      }
+    });
+  },
+
+  onDel: function() {
+    let _this = this;
+    const db = wx.cloud.database()
+    db.collection('counters').doc(this.data.record._id).remove({
+      success: res => {
+        wx.showToast({
+          title: '删除成功',
+        })
+
+        _this.onDelDone();
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '删除失败',
+        })
+        console.error('[数据库] [删除记录] 失败：', err)
+      }
+    })
+  },
+
+  onDelDone: function () {
+    app.globalData.records.splice(index, 1);
+
+    // 返回到上级页面
+    wx.navigateBack({
+    })
   },
 
   /**

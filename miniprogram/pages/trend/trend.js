@@ -147,20 +147,20 @@ Page({
         name: '体重',
         data: simulationData.data,
         format: function (val, name) {
-          return val.toFixed(2) + 'kg';
+          return val.toFixed(1) + 'kg';
         }
       }, {
         name: '骨骼肌',
         data: gugeji.data,
         format: function (val, name) {
-          return val.toFixed(2) + 'kg';
+          return val.toFixed(1) + 'kg';
         }
       },
       {
         name: '体脂率',
         data: tizhilv.data,
         format: function (val, name) {
-          return val.toFixed(2) + 'kg';
+          return val.toFixed(1) + '%';
         }
       }],
       xAxis: {
