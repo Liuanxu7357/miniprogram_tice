@@ -296,8 +296,8 @@ var Body = function Body(data) {
     },
     "neizangmianji": {
       cur: 内脏面积.cur,
-      min: 内脏面积.min,
-      max: 内脏面积.max,
+      min: 0, // 固定死
+      max: 75,// 固定死
     },
     "danbaizhi": {
       cur: 蛋白质.cur,
