@@ -17,5 +17,5 @@
       <view class="td">{{item.range}}</view>
     </view>
   </block>
-  <button type="warn" bindtap='deleteCurRecord' style="margin-top: 40rpx">删除本条记录</button>
+  <button wx:if="{{userInfo.type != '1'}}" type="warn" bindtap='deleteCurRecord' style="margin-top: 40rpx">删除本条记录</button>
 </view>

@@ -18,6 +18,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      userInfo: app.globalData.userInfo,
+    });
+
     // 查询出当前记录
     let records = app.globalData.records;
     index = records.findIndex(function (element) {
