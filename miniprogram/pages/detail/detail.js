@@ -9,9 +9,20 @@ Page({
    * 页面的初始数据
    */
   data: {
+    imgurl:null,
     listData: [
       { "type": "01", "value": "text1", "range": "type1" },
     ]
+  },
+
+  tap: function (e) {
+    wx.previewImage({
+      current: this.data.imgurl,     //当前图片地址
+      urls: [this.data.imgurl],               //所有要预览的图片的地址集合 数组形式
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   },
 
   /**
@@ -65,6 +76,16 @@ Page({
     wx.setNavigationBarTitle({
       title: '体成分结果(' + util.formatTime(record.qr.date) + ")",
     })
+
+    // 如果有PDF图片，则不再显示列表
+    let img = record.qr.img;
+    if (img != null && img.length != 0) {
+      this.setData({
+        imgurl: "https://kangear.com/gallery/" + img,
+      });
+
+      return;
+    }
 
     let list = [];
     list.push(

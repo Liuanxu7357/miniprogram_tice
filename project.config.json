@@ -12,6 +12,8 @@
 	"appid": "wx1f7956496dfe2b5e",
 	"projectname": "tice",
 	"libVersion": "2.2.5",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -29,12 +31,20 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "type=1&openid=oDoVK5H-1aMBDC7vEdYnzm5kEhKU&nickName=qinlaoban",
+					"pathName": "pages/index2/index",
+					"query": "type=1&openid=oDoVK5H-1aMBDC7vEdYnzm5kEhKU&nickName=qinlaoban",
+					"scene": null
 				}
 			]
 		}

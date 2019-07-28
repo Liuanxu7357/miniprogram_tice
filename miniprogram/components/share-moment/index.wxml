@@ -1,0 +1,17 @@
+<!--components/share-moment/index.wxml-->
+<view class='moment-root'>
+  <canvas canvas-id='myCanvas' class='canvas' style='height: {{ canvasHeight }}px'></canvas>
+   <view class="share-model" wx:if="{{ realShow }}">
+    <!-- 背景mask -->
+    <view class="mask" bindtap="hideDialog"></view>
+    <view class="share-conetent">
+      <!-- 分享内容 -->
+      <image class='share-image' style='width:{{ imageWidth }}px;height:{{ imageHeight }}px' src='{{ targetSharePath }}'></image>
+      <button class='btn-save-local' bindtap='saveImageTap'>保存</button>
+    </view>
+    <view class='close-wrppper' bindtap='closeModel'>
+    <!-- 右上角关闭按钮 -->
+    <image class='close-image' src='../../images/close.png'></image>
+    </view>
+  </view> 
+</view>

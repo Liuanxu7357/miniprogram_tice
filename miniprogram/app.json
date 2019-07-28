@@ -36,5 +36,6 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "体测318",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

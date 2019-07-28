@@ -24,6 +24,7 @@ function getShortFromData(data) {
 
 // 时间，地址，电话，database64
 let qrjson = {
+  "img": "",
   "date": Date.now(),
   "tel": '010-32347372',
   "addr": '昌平xxx街道xxx路xxxx号',
