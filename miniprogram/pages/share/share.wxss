@@ -5,6 +5,12 @@ page {
   background: #2D2D2C;
 }
 
+.image {
+  /* background: blue; */
+  width: 100%;
+  height: 600rpx;
+}
+
 .item_line {
   width: 100%; 
   display: flex;

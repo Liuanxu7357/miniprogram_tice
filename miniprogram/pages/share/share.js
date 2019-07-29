@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    modalHidden: true,
     channelState: 0,
     records: [
       { id: 0, date: 234323, weight: 15.5, gugeji: 32, tizhilv: 23 },
@@ -140,14 +141,32 @@ Page({
     // 其中 e.detail.path 为生成的图片路径
     console.log(e);
     wx.hideLoading();
+
+    this.setData({
+      img: e.detail.path,
+      modalHidden: false,
+    });
+  },
+
+  modalCandel(e) {
+    this.setData({
+      modalHidden: true,
+    });
+  },
+
+  modalConfirm(e) {
+    let _this = this;
     wx.saveImageToPhotosAlbum({
-      filePath: e.detail.path,
+      filePath: _this.data.img,
       success(result) {
         console.log(result)
         wx.showModal({
           title: '图片保存',
           content: '保存成功,快去相册分享到朋友圈吧',
         })
+      },
+      complete() {
+        _this.modalCandel();
       }
     })
   },

@@ -5,6 +5,12 @@
   <template is="channel" data='{{channelState: channelState}}'/>
 </view>
 
+ <modal title="保存到相册" hidden="{{modalHidden}}" bindconfirm="modalConfirm" bindcancel="modalCandel">
+  <view>
+    <image class="image" src="{{img}}" mode='aspectFit'></image>
+  </view>
+ </modal>
+
 <view hidden="{{false}}">
   <painter  palette="{{template}}" style="position:fixed;top:-9999rpx" bind:imgOK="onImgOK" bind:imgErr="onImgErr" />
 </view>

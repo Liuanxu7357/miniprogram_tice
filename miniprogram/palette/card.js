@@ -26,14 +26,11 @@ export default class LastMayday {
           },
         },
         {
-          type: 'qrcode',
-          content: 'Hello World',
+          type: 'image',
+          url: '/images/qrcode.jpg',
           css: {
             bottom: '40rpx',
             right: '120rpx',
-            color: 'red',
-            borderWidth: '10rpx',
-            borderColor: 'blue',
             width: '120rpx',
             height: '120rpx',
           },
