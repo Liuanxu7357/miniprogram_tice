@@ -1,11 +1,11 @@
 export default class LastMayday {
-  palette() {
+  palette(time, gugeji, tizhilv, gugeji_thumb, tizhilv_thumb, addr, tel) {
     return ({
-      width: '654rpx',
+      width: '833rpx',
       height: '1000rpx',
-      background: '#eee',
+      background: '#FFFF00',
       views: [
-        _textDecoration('overline', 0),
+        _textDecoration('我的体测:', 0),
         _textDecoration('underline', 1),
         _textDecoration('line-through', 2),
         _textDecoration('overline underline line-through', 3, 'red'),
@@ -17,17 +17,12 @@ export default class LastMayday {
         _des(2, 'borderRadius: 30rpx'),
         _image(3, 0, '60rpx'),
         _des(3, '圆形'),
-        {
+        { //背景
           type: 'image',
-          url: '/palette/avatar.jpg',
+          url: '/images/background.jpg',
           css: {
-            bottom: '40rpx',
-            left: '40rpx',
-            borderRadius: '50rpx',
-            borderWidth: '10rpx',
-            borderColor: 'yellow',
-            width: '100rpx',
-            height: '100rpx',
+            width: '833rpx',
+            height: '1000rpx',
           },
         },
         {
@@ -35,7 +30,7 @@ export default class LastMayday {
           content: 'Hello World',
           css: {
             bottom: '40rpx',
-            left: '180rpx',
+            right: '120rpx',
             color: 'red',
             borderWidth: '10rpx',
             borderColor: 'blue',
@@ -45,12 +40,68 @@ export default class LastMayday {
         },
         {
           type: 'text',
-          text: 'borderWidth',
+          text: time,  //时间
           css: {
-            bottom: '40rpx',
-            right: '200rpx',
-            color: 'green',
-            borderWidth: '2rpx',
+            top: '80rpx',
+            fontSize: '36rpx',
+            left: '380rpx',
+          },
+        },
+        {
+          type: 'image', //骨骼肌 手势
+          url: gugeji_thumb,
+          css: {
+            width: '60rpx',
+            height: '60rpx',
+            top: '220rpx',
+            right: '100rpx',
+          },
+        },
+        {
+          type: 'image', //体脂率 手势
+          url: tizhilv_thumb,
+          css: {
+            width: '60rpx',
+            height: '60rpx',
+            top: '520rpx',
+            right: '100rpx',
+          },
+        },
+        {
+          type: 'text',
+          text:  gugeji,  //骨骼肌内容
+          css: {
+            top: '300rpx',
+            fontSize: '34rpx',
+            left: '420rpx',
+          },
+        },
+        {
+          type: 'text',
+          text: tizhilv,  //体脂率内容
+          css: {
+            top: '600rpx',
+            fontSize: '34rpx',
+            left: '420rpx',
+          },
+        },
+    
+        {
+          type: 'text',
+          text: addr,  //地址
+          css: {
+            bottom: '160rpx',
+            fontSize: '31rpx',
+            left: '240rpx',
+          },
+        },
+        {
+          type: 'text', //电话
+          text: tel,
+          css: {
+            bottom: '110rpx',
+            fontSize: '31rpx',
+            left: '240rpx',
           },
         },
       ],

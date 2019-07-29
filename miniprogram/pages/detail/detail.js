@@ -84,6 +84,8 @@ Page({
         imgurl: "https://kangear.com/gallery/" + img,
       });
 
+      // 如果加载不了，提示其还在转换中
+
       return;
     }
 

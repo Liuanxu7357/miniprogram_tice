@@ -72,6 +72,38 @@ Page({
     }
   },
 
+  create_picture: function() {
+    console.log("xxx");
+
+    // 为了截图，这里需要在js上计算出结果
+    // this.setData({
+    //   template: new Card().palette(
+    //     this.data.date, 
+    //   "16.1kg(17.5-21.2)", 
+    //   "16.2kg(17.6-21.3)", 
+    //   "/images/thumb_down.png", 
+    //   "/images/thumb_up.png", 
+    //   "北京市海淀区", 
+    //   "010-23408234"),
+    // });
+
+    wx.showLoading({
+      title: '正在生成图片',
+    })
+
+    this.setData({
+      template: new Card().palette(
+        this.data.date,
+        this.formatGugeji(this.data.record.mp.tizhilv),
+        this.formatTizhilv(this.data.record.mp.gugeji),
+        this.getThumb(this.data.tizhilvSate),
+        this.getThumb(this.data.gugejiState),
+        this.data.record.qr.addr,
+        this.data.record.qr.tel),
+    });
+    
+  },
+
   checkTizhilv: function(tizhilv) {
     console.log("share.wxs: tizhilv");
 
@@ -107,6 +139,17 @@ Page({
   onImgOK(e) {
     // 其中 e.detail.path 为生成的图片路径
     console.log(e);
+    wx.hideLoading();
+    wx.saveImageToPhotosAlbum({
+      filePath: e.detail.path,
+      success(result) {
+        console.log(result)
+        wx.showModal({
+          title: '图片保存',
+          content: '保存成功,快去相册分享到朋友圈吧',
+        })
+      }
+    })
   },
 
   onImgErr(e) {
@@ -136,9 +179,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.setData({
-    //   template: new Card().palette(),
-    // });
     this.setData({
       userInfo: app.globalData.userInfo,
     });
@@ -196,6 +236,31 @@ Page({
       record: record,
       date: util.formatTime(record.qr.date)
     });
+  },
+
+  formatTizhilv(value) {
+    return value.cur + "%(" + value.min + "-" + value.max + ")";
+  },
+
+  formatGugeji(value) {
+    return value.cur + "kg(" + value.min + "-" + value.max + ")";
+  },
+
+  getThumb(state) {
+    let ret = "";
+    switch(state) {
+      case -1:
+        ret = "/images/thumb_down.png";
+      break;
+      case 0:
+        ret = "";
+      break;
+      case 1:
+        ret = "/images/thumb_up.png";
+      break;
+    }
+
+    return ret;
   },
 
   /**

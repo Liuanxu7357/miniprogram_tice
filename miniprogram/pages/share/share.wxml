@@ -5,8 +5,8 @@
   <template is="channel" data='{{channelState: channelState}}'/>
 </view>
 
-<view hidden="{{true}}">
-  <painter  palette="{{template}}" bind:imgOK="onImgOK" bind:imgErr="onImgErr" />
+<view hidden="{{false}}">
+  <painter  palette="{{template}}" style="position:fixed;top:-9999rpx" bind:imgOK="onImgOK" bind:imgErr="onImgErr" />
 </view>
 <!-- 样式一 -->
 <share-one 
@@ -67,7 +67,10 @@
   </scroll-view>
   <view style="height: 15vh; background: #014e4c" class="item_line">
     <image hidden="{{true}}" bindtap="share" style="height:112rpx; width:367rpx" src="../../images/share.png" open-type="share"></image>
-    <button wx:if="{{userInfo.type != '1'}}" style="width:367rpx" open-type="share">分享给朋友</button>
+    <view wx:if="{{userInfo.type != '1'}}" style="display: flex;">
+      <button open-type="share">分享给朋友</button>
+      <button bindtap="create_picture" >分享到朋友圈</button>
+    </view>
     <text wx:if="{{userInfo.type == '1'}}" style='color:white'>正在查看 {{userInfo.nickName}} 的体测试报告</text>
   </view>
 </view>

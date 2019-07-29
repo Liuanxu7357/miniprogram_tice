@@ -17,6 +17,6 @@
       <view class="td">{{item.range}}</view>
     </view>
   </block>
-  <image wx:if="{{imgurl!=null}}" style="width:100%; height: 900rpx; background:grey" src="https://kangear.com/gallery/0728_1153_888.jpg" mode="aspectFit" bindtap="tap" ></image>
+  <image wx:if="{{imgurl!=null}}" style="width:100%; height: 900rpx; background:grey" src="{{imgurl}}" mode="aspectFit" bindtap="tap" ></image>
   <button wx:if="{{userInfo.type != '1'}}" type="warn" bindtap='deleteCurRecord' style="margin-top: 40rpx">删除本条记录</button>
 </view>
