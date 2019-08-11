@@ -72,6 +72,49 @@ Page({
     })
   },
 
+  onAddDevice: function (device) {
+    const db = wx.cloud.database()
+    db.collection('device').add({
+      data: device,
+      success: res => {
+        wx.showToast({
+          title: '注册管理员成功',
+        })
+        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id);
+        record._id = res._id;
+
+        this.onAddDeviceSuccess(record);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '注册管理员成功失败'
+        })
+        console.error('[数据库] [新增记录] 失败：', err)
+      }
+    })
+  },
+
+  onAddDeviceSuccess: function (record) {
+    let records = this.data.records;
+    records.push(record);
+
+    // 将records按照从大到小排序一下
+    // 重新排列数据
+    function sortDevices(a, b) {
+      return b.qr.date - a.qr.date;
+    };
+
+    this.setData({
+      records: records.sort(sortDevices),
+    });
+
+    console.log(records.length);
+
+    app.globalData.records = records;
+  },
+
+
   onAddSuccess: function (record) {
     let records = this.data.records;
     records.push(record);
@@ -135,6 +178,13 @@ Page({
         })
         return;
       }
+
+      // check other qr
+      if (qrjson.date == null && qrjson.tel == null) {
+        this.addAdmin(e);
+        return;
+      }
+
       console.log(JSON.stringify(record));
       let record = new Record(qrjson).getJson();
       console.log(record);
@@ -178,6 +228,22 @@ Page({
         that.onScanOk(res.result);
       }
     });
+  },
+
+  addAdmin(e) {
+    console.log("addAdmin");
+    let obj = null;
+    try {
+      obj = JSON.parse(e);
+      if (obj != null && obj.sn != null && obj.action != null && obj.action == "add_admin") {
+        this.onAddDevice(obj);
+        return;
+      }
+      console.log(JSON.stringify(obj));
+      // this.onAddDevice(record);
+    } catch (error) {
+      return;
+    }
   },
 
   onScanOk: function (e) {
