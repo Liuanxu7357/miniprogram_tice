@@ -121,6 +121,10 @@ Page({
       return;
     }
 
+    wx.setNavigationBarTitle({
+      title: 'ID: ' + grecords[0].uid + "",
+    })
+
     this.setData({
       records: records
     });

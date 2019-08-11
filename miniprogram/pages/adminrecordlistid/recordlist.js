@@ -85,6 +85,9 @@ Page({
             icon: "success",
             title: '查询成功',
           })
+          wx.setNavigationBarTitle({
+            title: 'ID: ' + res.data.data[0].uid + "",
+          })
           _this.setData({ modalHidden: true });
         } else {
           wx.showToast({
