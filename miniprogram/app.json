@@ -1,5 +1,9 @@
 {
   "pages": [
+    "pages/adminrecordlist/recordlist",
+    "pages/admintrend/trend",
+    "pages/admindetail/detail",
+    "pages/adminrecordlistid/recordlist",
     "pages/index2/index",
     "pages/index/index",
     "pages/share/share",

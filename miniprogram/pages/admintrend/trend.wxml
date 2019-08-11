@@ -1,0 +1,11 @@
+<!--miniprogram/pages/trend/trend.wxml-->
+<view wx:if="{{records!=null && reocords.length!=0}}"  class="container">
+  <canvas canvas-id="lineCanvasWeight" disable-scroll="true" class="canvas"  bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
+  <!-- <canvas canvas-id="lineCanvasGugeji" class="canvas" bindtouchstart="touchHandler"></canvas> -->
+  <!-- <canvas canvas-id="lineCanvasTizhilv" class="canvas" bindtouchstart="touchHandler"></canvas> -->
+  <!-- <button type="primary" bindtap="updateData">更新数据</button> -->
+</view>
+
+<view wx:if="{{records==null || records.length == 0}}" style="height:100%; display: flex; align-items: center; vertical-align: center; justify-content: center;">
+  <text style="font-size:25rpx; color:grey">暂无体测记录</text>
+</view>

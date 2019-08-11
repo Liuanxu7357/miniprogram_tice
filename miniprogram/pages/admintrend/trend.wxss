@@ -1,0 +1,5 @@
+/* miniprogram/pages/trend/trend.wxss */
+page {
+  height: 100%;
+  width: 100%;
+} 

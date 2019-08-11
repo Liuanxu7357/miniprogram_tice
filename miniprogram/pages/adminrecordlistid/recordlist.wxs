@@ -1,0 +1,34 @@
+function formatTime(intdate) {
+  var date = getDate(intdate);
+  var Month = date.getMonth() + 1;
+  var Day = date.getDate();
+  var hours = date.getHours(); //计算剩余的小时
+  var minutes = date.getMinutes(); //计算剩余的分钟
+  var seconds = date.getSeconds();
+  var Y = date.getFullYear() + '-';
+  var M = Month < 10 ? '0' + Month + '-' : Month + '-';
+  var D = Day + 1 < 10 ? '0' + Day + '' : Day + '';
+  var H = hours < 10 ? '0' + hours + ':' : hours + ':'
+  var m = minutes < 10 ? '0' + minutes : minutes;
+  var s = seconds < 10 ? '0' + seconds : seconds;
+  return M + D + " " + H + m + ":" + s;
+}
+
+var localData = function (value) {
+  var date = getDate(value * 1000);
+  var Month = date.getMonth() + 1;
+  var Day = date.getDate();
+  var hours = date.getHours(); //计算剩余的小时
+  var minutes = date.getMinutes(); //计算剩余的分钟
+  var Y = date.getFullYear() + '年';
+  var M = Month < 10 ? '0' + Month + '月' : Month + '月';
+  var D = Day + 1 < 10 ? '0' + Day + '日' : Day + '日';
+  var H = hours < 10 ? '0' + hours + ':' : hours + ':'
+  var m = minutes < 10 ? '0' + minutes : minutes;
+  return M + D + "   " + H + m;
+}
+
+module.exports = {
+  formatTime: formatTime,
+  localData: localData
+}

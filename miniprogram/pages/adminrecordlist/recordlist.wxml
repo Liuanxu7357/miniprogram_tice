@@ -1,0 +1,36 @@
+<!--miniprogram/pages/recordlist/recordlist.wxml-->
+<!-- <text>miniprogram/pages/recordlist/recordlist.wxml</text> -->
+<import src="../../common/channel/channel.wxml" />
+<view hidden="{{true}}" class='container'>
+  <template is="channel" data='{{channelState: channelState}}'/>
+</view>
+<view style="width: auto; margin: 10rpx; background:#e7f505">
+<view class="item_line">
+  <text style="width:20%;" class="item head_item">ID</text>
+  <text style="width:40%;" class="item head_item">日期</text>
+  <text style="width:20%;" class="item head_item">性别</text>
+  <text style="width:20%;" class="item head_item">体重</text>
+</view>
+<scroll-view scroll-y style="height: 78vh;" bindscrolltoupper="upper" bindscrolltolower="lower">
+  <view hidden="{{records.length == 0}}" id="{{item.id}}" bindtap="onItemClick" class="item_line scroll_item_line" hover-class='item_line_hover' wx:for="{{records}}" wx:key="_id">
+    <text style="width:20%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size:25rpx" class="item scroll_item">{{item.uid}}</text>
+    <text style="width:40%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size:20rpx" class="item scroll_item">{{item.completeTime}}</text>
+    <text style="width:20%;" class="item scroll_item">{{item.record.gender == 1 ? "男" : "女"}}</text>
+    <text style="width:20%;" class="item scroll_item">{{item.record.weight[0]}}</text>
+  </view>
+  <view wx:if="{{records.length == 0}}" style="height:100%; display: flex; align-items: center; vertical-align: center; justify-content: center;">
+    <text style="font-size:25rpx; color:grey">暂无记录，请扫码添加记录</text>
+  </view>
+</scroll-view>
+  <view style="height: 15vh; background: #014e4c" class="item_line">
+    <!-- 开始按钮 -->
+    <button wx:if="{{userInfo.type != '1'}}" style="background-color: transparent;" id='start' class='imageBtn' bindtap='scan'>
+      <image style="height:78rpx; width:382rpx" src="../../images/get_report.png"></image>
+    </button>
+
+    <text wx:if="{{userInfo.type == '1'}}" style='color:white'>正在查看 {{userInfo.nickName}} 的体测试报告</text>
+  </view> 
+</view>
+
+<wxs src="recordlist.wxs" module="recordlist"/>
+

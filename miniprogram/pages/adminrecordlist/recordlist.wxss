@@ -1,0 +1,44 @@
+/* miniprogram/pages/recordlist/recordlist.wxss */
+page {
+  background: #2D2D2C;
+}
+
+.item_line {
+  width: 100%; 
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  justify-items: auto;
+  flex-direction: row;
+}
+
+/** item */
+.item {
+  width:40%; 
+  text-align:center; 
+  color:#2d2d2c; 
+  font-size:40rpx;
+}
+
+/** Head */
+.head_item {
+  color:#2d2d2c; 
+  font-size:40rpx;
+}
+
+/** scroll */
+.scroll_item {
+  color:#fdfdfd; 
+  font-size:30rpx;
+}
+
+.scroll_item_line {
+  margin-top: 10rpx;
+  height: 66rpx; 
+  background:#464A02;
+}
+
+.item_line_hover {
+  font-size: 20rpx;
+  background: #000000;
+}
