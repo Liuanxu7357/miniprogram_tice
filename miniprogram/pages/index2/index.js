@@ -104,7 +104,14 @@ Page({
           });
           app.globalData.sns = sns;
         }
-        console.warn("app.globalData.sns: ", app.globalData.sns);
+
+        let sns2 = getApp().globalData.sns;
+        let para = "";
+        sns2.forEach(function (item, index) {
+          para += ("&sn=" + item)
+        });
+        app.globalData.snpara = para;
+        console.warn("app.globalData.sns: ", app.globalData.sns2);
         
         // 进入
         wx.reLaunch({
