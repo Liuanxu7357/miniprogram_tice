@@ -272,7 +272,7 @@ Page({
     console.log(e);
     // 将id传递进来
     wx.navigateTo({
-      url: '../detail/detail?id=' + e.currentTarget.id,
+      url: '../admindetail/detail?id=' + e.currentTarget.id,
     })
   },
 

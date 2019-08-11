@@ -26,6 +26,7 @@ Page({
 
   // 第三步：跳转
   gotoRecordlist: function (e) {
+    let _this = this;
     // 查询当前用户所有的 counters
     console.log("gotoRecordlist userInfo: ", app.globalData.userInfo);
     console.log("gotoRecordlist myUserInfo: ", app.globalData.myUserInfo);
@@ -66,11 +67,7 @@ Page({
           return b.qr.date - a.qr.date;
         };
         app.globalData.records = res.data.sort(sortDevices);
-
-        // 进入
-        wx.reLaunch({
-          url: '../recordlist/recordlist',
-        });
+        _this.queryDevice();
       },
       fail: err => {
         wx.showToast({
@@ -79,6 +76,44 @@ Page({
         })
         console.error('[数据库] [查询记录] 失败：', err)
 
+        app.globalData.records = [];
+        // 进入
+        wx.reLaunch({
+          url: '../recordlist/recordlist',
+        });
+      }
+    })
+  },
+
+  queryDevice: function(e) {
+    // 才查询到20个数据项?
+    // 最新三个月的 TODO: 当大于20个数据项时会有一些问题，需要能够分布加载；
+    let time = Date.now() - 7862400 * 1000;
+    const db = wx.cloud.database();
+    const _ = db.command;
+    db.collection('device').where({
+      _openid: app.globalData.userInfo.openid
+    }).get({
+      success: res => {
+        console.log('[数据库] [查询记录] 成功: ', res)
+        app.globalData.sns = [];
+        if (res.data.length != 0) {
+          let sns = [];
+          res.data.forEach(function (item, index) {
+            sns.push(item.sn);
+          });
+          app.globalData.sns = sns;
+        }
+        console.warn("app.globalData.sns: ", app.globalData.sns);
+        
+        // 进入
+        wx.reLaunch({
+          url: '../recordlist/recordlist',
+        });
+      },
+      fail: err => {
+        app.globalData.sns = [];
+        console.error('[数据库] [查询记录] 失败：', err)
         app.globalData.records = [];
         // 进入
         wx.reLaunch({

@@ -211,28 +211,6 @@ Page({
     wx.navigateTo({
       url: '/pages/adminrecordlistid/recordlist',
     })
-
-    // if (app.globalData.debug) {
-    //   let qrjson = {
-    //     "date": Date.now(),
-    //     "tel": '010-32347372',
-    //     "addr": '昌平xxx街道xxx路xxxx号',
-    //     "score": 90,
-    //     "database64": "AAAAAAAAAAAAAAAAAAAAAAAAAAABKKQGIAOdGn0WUAB0C0gLZQH5CXgJExVTEwAAAAAAewIWArUCMwL8ARsC7QBfAH8AEALVAfUBLwEKAUoBmQFtAYQBdwBkAHEAIyQmAIEAjwCjABgB9QAJASMfISQfIRkB6gD5AFYAVgBcAFoAVgBcAA8GCA4GCIwALwA/ACMRFyERF+sEhANMBBQBuQDwACgBlgDIAEAEPgRdBLEDXVBaHx4jAwTwBKQCK6WAfoArgA8H3Ao="
-    //   }
-    //   that.onScanOk(JSON.stringify(qrjson));
-    //   return;
-    // }
-    
-    // // 只允许从相机扫码
-    // wx.scanCode({
-    //   onlyFromCamera: true,
-    //   success(res) {
-    //     // 将记录保存下来
-    //     console.log(res)
-    //     that.onScanOk(res.result);
-    //   }
-    // });
   },
 
   addAdmin(e) {
@@ -296,14 +274,20 @@ Page({
   onLoad: function (options) {
     // 从网络查询
     _this = this;
+    let sns = getApp().globalData.sns;
+    let para = "";
+    sns.forEach(function (item, index) {
+      para += ("&sn=" + item)
+    });
+    console.log(para);
     wx.request({
-      url: 'https://kangear.com/lala/physical?sn=882c1ee687b700000000&reverse=true', //仅为示例，并非真实的接口地址
+      url: 'https://kangear.com/lala/physical?reverse=true&type=bySn' + para, //仅为示例，并非真实的接口地址
       data: {
-        // sn: ['2', '3'],
-        // uid: 'ds'
+        // type: "bySn",
+        // sn: getApp().globalData.sns
       },
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/json;charset=utf-8' // 默认值
       },
       success(res) {
         console.log(res.data)

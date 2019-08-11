@@ -285,6 +285,12 @@ Page({
     this.setData({ channelState: state});
   },
 
+  admin: function (e) {
+    wx.navigateTo({
+      url: '/pages/adminrecordlist/recordlist',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -295,6 +301,10 @@ Page({
       userInfo: app.globalData.userInfo,
     });
 
+
+    this.setData({
+      sns: app.globalData.sns
+    });
     // let record = new Record().getJson();
     // console.log(record);
     // app.globalData.records = this.data.records;
