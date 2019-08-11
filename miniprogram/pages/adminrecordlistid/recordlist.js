@@ -101,6 +101,8 @@ Page({
 
   modalCandel: function(e) {
     console.log(e);
+    wx.navigateBack({
+    })
   },
 
   onAdd: function (record) {

@@ -31,11 +31,10 @@
 </scroll-view>
   <view style="height: 15vh; background: #014e4c" class="item_line">
     <!-- 开始按钮 -->
-    <button wx:if="{{userInfo.type != '1'}}" style="background-color: transparent;" id='start' class='imageBtn' bindtap='scan'>
-      <image style="height:78rpx; width:382rpx" src="../../images/get_report.png"></image>
+    <button style="" id='start' class='imageBtn' bindtap='scan'>
+      查看趋势
+      <!-- <image style="height:78rpx; width:382rpx" src="../../images/get_report.png"></image> -->
     </button>
-
-    <!-- <text wx:if="{{userInfo.type == '1'}}" style='color:white'>正在查看 {{userInfo.nickName}} 的体测试报告</text> -->
   </view> 
 </view>
 
