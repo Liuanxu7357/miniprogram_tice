@@ -62,14 +62,16 @@ Page({
     console.log(e);
     this.data.value;
 
+    let id = _this.data.uid.trim()
+
     wx.showLoading({
-      title: '查询 ' + _this.data.uid + " 中",
+      title: '查询 ' + id + " 中",
     })
 
     wx.request({
       url: 'https://kangear.com/lala/physical?reverse=true&type=byeSnAndUid' + app.globalData.snpara, //仅为示例，并非真实的接口地址
       data: {
-        uid: _this.data.uid,
+        uid: id,
       },
       header: {
         'content-type': 'application/json' // 默认值

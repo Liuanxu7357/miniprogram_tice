@@ -254,7 +254,7 @@ Page({
     // 从网络查询
     _this = this;
     wx.request({
-      url: 'https://kangear.com/lala/physical?reverse=true&type=bySn' + app.globalData.snpara, //仅为示例，并非真实的接口地址
+      url: 'https://kangear.com/lala/physical?reverse=true&type=byeSnAndUid' + app.globalData.snpara, //仅为示例，并非真实的接口地址
       data: {
         // type: "bySn",
         // sn: getApp().globalData.sns

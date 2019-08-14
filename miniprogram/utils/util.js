@@ -1,3 +1,4 @@
+const app = getApp();
 // const formatTime = date => {
 //   const year = date.getFullYear()
 //   const month = date.getMonth() + 1
@@ -66,8 +67,47 @@ function bytesToHex(byteArray) {
   }).join(' ')
 }
 
+function queryDevice(e) {
+  // 才查询到20个数据项?
+  // 最新三个月的 TODO: 当大于20个数据项时会有一些问题，需要能够分布加载；
+  let time = Date.now() - 7862400 * 1000;
+  const db = wx.cloud.database();
+  const _ = db.command;
+  db.collection('device').where({
+    _openid: app.globalData.userInfo.openid
+  }).get({
+    success: res => {
+      console.log('[数据库] [查询记录] 成功: ', res)
+      app.globalData.sns = [];
+      if (res.data.length != 0) {
+        let sns = [];
+        res.data.forEach(function (item, index) {
+          sns.push(item.sn);
+        });
+        app.globalData.sns = sns;
+      }
+
+      let sns2 = getApp().globalData.sns;
+      let para = "";
+      sns2.forEach(function (item, index) {
+        para += ("&sn=" + item)
+      });
+      app.globalData.snpara = para;
+      console.warn("app.globalData.sns: ", app.globalData.sns2);
+
+      // 进入
+      wx.reLaunch({
+        url: '../recordlist/recordlist',
+      });
+    },
+    fail: err => {
+    }
+  })
+}
+
 
 module.exports = {
+  queryDevice: queryDevice,
   bytesToHex: bytesToHex,
   formatRange: formatRange,
   formatTime: formatTime,

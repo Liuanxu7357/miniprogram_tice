@@ -80,10 +80,10 @@ Page({
         wx.showToast({
           title: '注册管理员成功',
         })
-        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id);
-        record._id = res._id;
-
-        this.onAddDeviceSuccess(record);
+        // console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id);
+        // record._id = res._id;
+        util.queryDevice();
+        // this.onAddDeviceSuccess(record);
       },
       fail: err => {
         wx.showToast({
@@ -241,6 +241,10 @@ Page({
       }
       console.log(JSON.stringify(obj));
       // this.onAddDevice(record);
+      wx.showToast({
+        icon: 'none',
+        title: '二维码无效',
+      })
     } catch (error) {
       return;
     }

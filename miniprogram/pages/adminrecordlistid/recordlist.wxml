@@ -4,7 +4,7 @@
 
  <modal title="查询" hidden="{{modalHidden}}" bindconfirm="modalConfirm" bindcancel="modalCandel">
   <view>
-    <input placeholder="输入ID查询" bindinput="bindKeyInput"  auto-focus></input>
+    <input placeholder="输入ID查询" confirm-type="search" bindinput="bindKeyInput" bindconfirm="modalConfirm" auto-focus></input>
   </view>
  </modal>
 
