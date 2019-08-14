@@ -95,10 +95,10 @@ Page({
     this.setData({
       template: new Card().palette(
         this.data.date,
-        this.formatGugeji(this.data.record.mp.tizhilv),
-        this.formatTizhilv(this.data.record.mp.gugeji),
-        this.getThumb(this.data.tizhilvSate),
+        this.formatGugeji(this.data.record.mp.gugeji),
+        this.formatTizhilv(this.data.record.mp.tizhilv),
         this.getThumb(this.data.gugejiState),
+        this.getThumb(this.data.tizhilvSate),
         this.data.record.qr.addr,
         this.data.record.qr.tel),
     });
@@ -258,11 +258,11 @@ Page({
   },
 
   formatTizhilv(value) {
-    return value.cur + "%(" + value.min + "-" + value.max + ")";
+    return value.cur + "%\n(" + value.min + "%-" + value.max + "%)";
   },
 
   formatGugeji(value) {
-    return value.cur + "kg(" + value.min + "-" + value.max + ")";
+    return value.cur + "kg\n(" + value.min + "kg-" + value.max + "kg)";
   },
 
   getThumb(state) {

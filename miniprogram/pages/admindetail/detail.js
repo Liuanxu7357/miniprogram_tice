@@ -98,7 +98,7 @@ Page({
     console.log("onResult: ", record);
     // titile
     wx.setNavigationBarTitle({
-      title: '体成分结果(' + util.formatTime(record.completeTime) + ")",
+      title: '体成分结果(' + record.completeTime.substring(5, 10) + ")",
     })
 
     // 如果有PDF图片，则不再显示列表

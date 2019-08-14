@@ -39,7 +39,7 @@ export default class LastMayday {
           type: 'text',
           text: time,  //时间
           css: {
-            top: '80rpx',
+            top: '60rpx',
             fontSize: '36rpx',
             left: '380rpx',
           },
@@ -68,7 +68,7 @@ export default class LastMayday {
           type: 'text',
           text:  gugeji,  //骨骼肌内容
           css: {
-            top: '300rpx',
+            top: '320rpx',
             fontSize: '34rpx',
             left: '420rpx',
           },
