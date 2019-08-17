@@ -85,8 +85,7 @@ Page({
       });
 
       // 如果加载不了，提示其还在转换中
-
-      return;
+      // return;
     }
 
     let list = [];
@@ -161,6 +160,7 @@ Page({
 
   onDel: function() {
     let _this = this;
+    console.log(this.data.record);
     const db = wx.cloud.database()
     db.collection('counters').doc(this.data.record._id).remove({
       success: res => {
