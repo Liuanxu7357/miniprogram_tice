@@ -87,7 +87,7 @@ export default class LastMayday {
           type: 'text',
           text: addr,  //地址
           css: {
-            bottom: '160rpx',
+            bottom: '100rpx',
             fontSize: '31rpx',
             left: '240rpx',
           },
@@ -96,7 +96,7 @@ export default class LastMayday {
           type: 'text', //电话
           text: tel,
           css: {
-            bottom: '110rpx',
+            bottom: '40rpx',
             fontSize: '31rpx',
             left: '240rpx',
           },
