@@ -37,7 +37,7 @@ Page({
     // 从网络查询
     _this = this;
     wx.request({
-      url: 'https://kangear.com/lala/physical', //仅为示例，并非真实的接口地址
+      url: 'https://328s.cn/v1/318/physical', //仅为示例，并非真实的接口地址
       data: {
         type: 'byId',
         id: options.id
@@ -105,7 +105,7 @@ Page({
     let img = record.img;
     if (img != null && img.length != 0) {
       this.setData({
-        imgurl: "https://kangear.com/gallery/" + img,
+        imgurl: "https://328s.cn/v1/318/reportimg/" + img,
       });
 
       // 如果加载不了，提示其还在转换中

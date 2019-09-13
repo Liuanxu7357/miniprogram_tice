@@ -81,7 +81,7 @@ Page({
     let img = record.qr.img;
     if (img != null && img.length != 0) {
       this.setData({
-        imgurl: "https://kangear.com/gallery/" + img,
+        imgurl: "https://328s.cn/v1/318/reportimg/" + img,
       });
 
       // 如果加载不了，提示其还在转换中
