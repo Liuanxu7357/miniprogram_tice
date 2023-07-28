@@ -33,12 +33,12 @@ page {
 }
 
 .scroll_item_line {
-  margin-top: 10rpx;
+  margin-top: 0;
   height: 66rpx; 
-  background:#464A02;
+  background:#444f5a;
 }
 
 .item_line_hover {
   font-size: 20rpx;
-  background: #000000;
+  background: #323232;
 }

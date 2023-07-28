@@ -58,14 +58,6 @@ function randomNum(minNum, maxNum) {
   }
 } 
 
-/**
- * array转换成16进制字符串
- */
-function bytesToHex(byteArray) {
-  return Array.from(byteArray, function (byte) {
-    return ('0' + (byte & 0xFF).toString(16).toUpperCase()).slice(-2);
-  }).join(' ')
-}
 
 function queryDevice(e) {
   // 才查询到20个数据项?

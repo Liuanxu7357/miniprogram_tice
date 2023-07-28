@@ -21,8 +21,8 @@
   showShareModel='{{ shareOne.showShareModel }}'
 ></share-one>
 
-<view wx:if="{{record!=null}}"  style="width: auto; margin: 10rpx; background:#e7f505">
-  <scroll-view scroll-y style="height: 85vh;" bindscrolltoupper="upper" bindscrolltolower="lower">
+<view wx:if="{{record!=null}}"  style="width: auto; background:#eeeeee">
+  <scroll-view scroll-y style="height: 90vh;" bindscrolltoupper="upper" bindscrolltolower="lower">
     <view class="addr">
       <view style="margin-top:43rpx; margin-left:66rpx; font-size:54rpx;">我的体测：</view>
       <view class="addr_content">{{date}}</view>
@@ -71,16 +71,26 @@
       </view>
     </view>
   </scroll-view>
-  <view style="height: 15vh; background: #014e4c" class="item_line">
+  <fui-row style="height: 15vh; background: #014e4c">
+    <fui-col span="{{12}}">
+      <fui-button bind:click='share' wx:if="{{userInfo.type != '1'}}" text="分享给朋友">
+      </fui-button>
+    </fui-col>
+    <fui-col span="{{12}}">
+      <fui-button bind:click='create_picture' wx:if="{{userInfo.type != '1'}}" text="分享到朋友圈"></fui-button>
+    </fui-col>
+    <text wx:if="{{userInfo.type == '1'}}" style='color:#222831'>正在查看 {{userInfo.nickName}} 的体测试报告</text>
+  </fui-row>
+  <!-- <view style="height: 15vh; background: #014e4c" class="item_line">
     <image hidden="{{true}}" bindtap="share" style="height:112rpx; width:367rpx" src="../../images/share.png" open-type="share"></image>
     <view wx:if="{{userInfo.type != '1'}}" style="display: flex;">
       <button open-type="share">分享给朋友</button>
       <button bindtap="create_picture" >分享到朋友圈</button>
     </view>
     <text wx:if="{{userInfo.type == '1'}}" style='color:white'>正在查看 {{userInfo.nickName}} 的体测试报告</text>
-  </view>
+  </view> -->
 </view>
 
 <view wx:if="{{record==null}}" style="height:100%; display: flex; align-items: center; vertical-align: center; justify-content: center;">
-  <text style="font-size:25rpx; color:grey">暂无体测记录</text>
+  <text style="font-size:25rpx; color:#eeeeee">暂无体测记录</text>
 </view>

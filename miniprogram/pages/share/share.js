@@ -132,9 +132,9 @@ Page({
 
   share: function (e) {
     console.log(e);
-    // wx.showShareMenu({
-    //   withShareTicket: true
-    // })
+    wx.showShareMenu({
+      withShareTicket: true
+    })
   },
 
   onImgOK(e) {
@@ -226,27 +226,27 @@ Page({
     let record = records[0];
     // 如果长度为0那么显示一个无效的
     // TODO
-    // if (record == null) {
-    //   record = {
-    //     qr: {
-    //       date: Date.now(),
-    //       addr: "无",
-    //       tel: "无"
-    //     },
-    //     mp: {
-    //       gugeji: {
-    //         min: "无",
-    //         max: "无",
-    //         cur: "无"
-    //       },
-    //       tizhilv: {
-    //         min: "无",
-    //         max: "无",
-    //         cur: "无"
-    //       }
-    //     },
-    //   }
-    // }
+    if (record == null) {
+      record = {
+        qr: {
+          date: Date.now(),
+          addr: "无",
+          tel: "无"
+        },
+        mp: {
+          gugeji: {
+            min: "无",
+            max: "无",
+            cur: "无"
+          },
+          tizhilv: {
+            min: "无",
+            max: "无",
+            cur: "无"
+          }
+        },
+      }
+    }
 
     // 取出最后一个
     this.setData({
