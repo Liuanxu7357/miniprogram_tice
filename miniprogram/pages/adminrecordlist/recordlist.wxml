@@ -22,9 +22,9 @@
     <text style="font-size:25rpx; color:grey">暂无记录，请扫码添加记录</text>
   </view>
 </scroll-view>
-  <view style="height: 15vh; background: #00adb5" >
+  <view >
     <!-- 开始按钮 -->
-    <fui-button bind:click='scan' wx:if="{{userInfo.type != '1'}}" text="根据用户ID查询">
+    <fui-button radius="0" radius="0" bind:click='scan' wx:if="{{userInfo.type != '1'}}" text="根据用户ID查询">
     </fui-button>
   </view> 
 </view>

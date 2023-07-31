@@ -29,10 +29,9 @@
     <text style="font-size:25rpx; color:grey">暂无记录，请扫码添加记录</text>
   </view>
 </scroll-view>
-  <view style="height: 15vh; background: #00adb5" class="">
+  <view>
     <!-- 开始按钮 -->
-    <fui-button id='start' text="查看趋势" bindtap='scan'>
-      查看趋势
+    <fui-button id='start' radius="0" text="查看趋势" bindtap='scan'>
       <!-- <image style="height:78rpx; width:382rpx" src="../../images/get_report.png"></image> -->
     </fui-button>
   </view> 

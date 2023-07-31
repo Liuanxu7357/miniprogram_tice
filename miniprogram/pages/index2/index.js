@@ -50,6 +50,8 @@ Page({
     // 最新三个月的 TODO: 当大于20个数据项时会有一些问题，需要能够分布加载；
     let time = Date.now() - 7862400 * 1000;
     const db = wx.cloud.database();
+    console.log("db:" )
+    console.log(db)
     const _ = db.command;
     console.log("Date.now(): " + Date.now());
     db.collection('counters').where({

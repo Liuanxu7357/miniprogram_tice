@@ -21,7 +21,7 @@
   showShareModel='{{ shareOne.showShareModel }}'
 ></share-one>
 
-<view wx:if="{{record!=null}}"  style="width: auto; background:#eeeeee">
+<view wx:if="{{record!=null}}"  style="width: auto; background:#e7f505">
   <scroll-view scroll-y style="height: 90vh;" bindscrolltoupper="upper" bindscrolltolower="lower">
     <view class="addr">
       <view style="margin-top:43rpx; margin-left:66rpx; font-size:54rpx;">我的体测：</view>
@@ -71,13 +71,13 @@
       </view>
     </view>
   </scroll-view>
-  <fui-row style="height: 15vh; background: #014e4c">
+  <fui-row>
     <fui-col span="{{12}}">
-      <fui-button bind:click='share' wx:if="{{userInfo.type != '1'}}" text="分享给朋友">
+      <fui-button background="#c9d6df" color="#1e2022" borderColor="#c9d6df" radius="0" open-type='share' wx:if="{{userInfo.type != '1'}}" text="分享给朋友">
       </fui-button>
     </fui-col>
     <fui-col span="{{12}}">
-      <fui-button bind:click='create_picture' wx:if="{{userInfo.type != '1'}}" text="分享到朋友圈"></fui-button>
+      <fui-button background="#c9d6df" color="#1e2022" borderColor="#c9d6df" radius="0" bind:click='create_picture' wx:if="{{userInfo.type != '1'}}" text="分享到朋友圈"></fui-button>
     </fui-col>
     <text wx:if="{{userInfo.type == '1'}}" style='color:#222831'>正在查看 {{userInfo.nickName}} 的体测试报告</text>
   </fui-row>

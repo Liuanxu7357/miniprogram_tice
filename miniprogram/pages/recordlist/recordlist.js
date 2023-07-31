@@ -12,27 +12,37 @@ Page({
   data: {
     channelState: 0,
     records: [
-      { id: 0, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
-      { id: 1, date: 1548870444345, weight: 60.7, gugeji: 32, tizhilv: 23 },
-      { id: 2, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
-      { id: 3, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
-      { id: 4, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
-      { id: 5, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
-      { id: 6, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
-      { id: 7, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
-      { id: 8, date: 1548770344345, weight: 60.7, gugeji: 32, tizhilv: 23 },
-      { id: 9, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
-      { id: 10, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
-      { id: 11, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
-      { id: 12, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
-      { id: 13, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
-      { id: 14, date: 1548770344345, weight: 15.5, gugeji: 32, tizhilv: 23 },
-      { id: 15, date: 1548770344345, weight: 60.7, gugeji: 32, tizhilv: 23 },
-      { id: 16, date: 1548770344345, weight: 74.2, gugeji: 32, tizhilv: 23 },
-      { id: 17, date: 1548770344345, weight: 75.2, gugeji: 32, tizhilv: 23 },
-      { id: 18, date: 1548770344345, weight: 76.2, gugeji: 32, tizhilv: 23 },
-      { id: 19, date: 1548770344345, weight: 77.2, gugeji: 32, tizhilv: 23 },
-      { id: 20, date: 1548770344345, weight: 78.2, gugeji: 32, tizhilv: 23 },
+      
+      // {
+      //   date: Date.now(), 
+      //   // 1. 性别
+      //   gender: 1,
+      //   // 2. 年龄
+      //   age: 1,
+      //   // 3. 身高
+      //   height: 170,
+      //   // 4. 体重
+      //   weight: 70,
+      //   // bmi
+      //   bmi: 24.1,
+      //   // 体脂率
+      //   tizhilv: 25,
+      //   // 体脂肪量
+      //   tizhifangliang: 18.9,
+      //   // 肌肉量
+      //   jirouliang: 51.5,
+      //   // 骨骼肌量
+      //   gugeji: 30.1,
+      //   // 身体水分
+      //   shentishuifen: 40.1,
+      //   // 内脏面积
+      //   neizangmianji: 75,
+      //   // 蛋白质量
+      //   danbaizhiliang: 11.1,
+      //   // 无机盐量
+      //   wujiyanliang: 3.8, 
+      //   database64: "xxxxxxx"
+      // }
     ]
   },
 
@@ -105,9 +115,9 @@ Page({
       return b.qr.date - a.qr.date;
     };
 
-    this.setData({
-      records: records.sort(sortDevices),
-    });
+    // this.setData({
+    //   records: records.sort(sortDevices),
+    // });
 
     console.log(records.length);
 
@@ -301,7 +311,7 @@ Page({
   onLoad: function (options) {
     let records = app.globalData.records;
     this.setData({
-      records: records,
+      // records: records,
       userInfo: app.globalData.userInfo,
     });
 
@@ -325,10 +335,30 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("onShow");
-    this.setData({
-      records: app.globalData.records,
-    });
+    console.log("onShowPPLAX");
+
+    const db = wx.cloud.database()
+    // 查询当前用户所有的 counters
+    db.collection('counters').where({
+      _openid: this.data.openid
+    }).get({
+      success: res => {
+        app.globalData.records = res.data, null, 2
+        this.setData({
+          records: res.data
+        })
+        console.log(app.globalData.records)
+        console.log(this.records)
+        console.log('[数据库] [查询记录] 成功: ', res)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
   },
 
   /**

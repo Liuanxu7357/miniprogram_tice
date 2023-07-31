@@ -4,7 +4,7 @@
 <view hidden="{{true}}" class='container'>
   <template is="channel" data='{{channelState: channelState}}'/>
 </view>
-<view style="background-color: #eeeeee;">
+<view style="background-color: #e7f505;">
 <view class="item_line">
   <text style="width:40%;" class="item head_item">日期</text>
   <text style="width:20%;" class="item head_item">体重</text>
@@ -19,19 +19,15 @@
     <text style="width:20%;" class="item scroll_item">{{item.mp.tizhilv.cur}}</text>
   </view>
   <view wx:if="{{records.length == 0}}" style="height:100%; display: flex; align-items: center; vertical-align: center; justify-content: center;">
-    <text style="font-size:25rpx; color:#eeeeee">暂无记录，请扫码添加记录</text>
+    <text style="font-size:25rpx; color:#393e46">暂无记录，请扫码添加记录</text>
   </view>
 </scroll-view>
 <fui-row>
-  <fui-col span="{{20}}">
-    <fui-button bind:click='scan' wx:if="{{userInfo.type != '1'}}" text="扫码获取报告">
+  <fui-col span="{{24}}">
+    <fui-button background="#c9d6df" color="#1e2022" borderColor="#c9d6df"  bind:click='scan' radius="0" wx:if="{{userInfo.type != '1'}}" text="扫码获取报告">
     <fui-icon name="scan"></fui-icon></fui-button>
   </fui-col>
-  <fui-col span="{{4}}">
-    <fui-button bind:click='admin' wx:if="{{sns.length != 0}}" text="">
-    <fui-icon name="principal" style="color: aliceblue;"></fui-icon></fui-button>
-  </fui-col>
-  <!-- <text wx:if="{{userInfo.type == '1'}}" style='color:white'>正在查看 {{userInfo.nickName}} 的体测试报告</text> -->
+  <text wx:if="{{userInfo.type == '1'}}" style='color:white'>正在查看 {{userInfo.nickName}} 的体测试报告</text>
 </fui-row>
 
 </view>

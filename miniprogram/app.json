@@ -42,7 +42,6 @@
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
-    "fui-segmented-control": "components/firstui/fui-segmented-control/fui-segmented-control",
     "fui-button": "components/firstui/fui-button/fui-button",
     "fui-row": "components/firstui/fui-row/fui-row",
     "fui-col": "components/firstui/fui-col/fui-col",
